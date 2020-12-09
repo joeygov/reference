@@ -19,6 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->smallInteger('user_role')->default(1);
             $table->string('email')->nullable();
             $table->string('password');
+            $table->string('remember_token')->nulllable();
             $table->smallInteger('user_status')->default(1);
             $table->boolean('is_wfh')->default(false);
             $table->string('first_name', 100);

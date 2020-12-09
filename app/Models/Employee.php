@@ -11,6 +11,7 @@ class Employee extends User
         'user_role',
         'email',
         'password',
+        'remember_token',
         'user_status',
         'is_wfh',
         'first_name',
@@ -31,5 +32,6 @@ class Employee extends User
     ];
     protected $hidden = [
         'password',
+        'remember_token',
     ];
 }
