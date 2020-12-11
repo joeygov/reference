@@ -20,4 +20,7 @@ Route::get('/', function () {
 Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/login', 'AuthController@index')->name('login');
     Route::post('/login', 'LoginController@store');
+
+    Route::get('/entryPage', 'EntryPageController@entryPage')->name('entryPage');
 });
+
