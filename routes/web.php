@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return redirect()->route('login');
 });
 
 Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/login', 'AuthController@index')->name('login');
-    Route::post('/login', 'LoginController@store');
+    Route::post('/login', 'AuthController@store');
+
+    Route::middleware('auth:user')->group(function () {
+        Route::get('/home', 'UserController@index')->name('home');
+    });
 });
