@@ -31,5 +31,9 @@ class AuthController extends Controller
 
     public function logOut()
     {
+        dd('heello');
+        Auth::guard('user')->logout();
+
+        return redirect()->route('login');
     }
 }
