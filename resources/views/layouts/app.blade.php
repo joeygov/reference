@@ -1,4 +1,4 @@
-    <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/shared/style.css') }}">
 
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+
     @stack('css')
 </head>
 <body>
@@ -35,5 +37,5 @@
     <script src="{{ asset('assets/js/shared/off-canvas.js') }}"></script>
     <script src="{{ asset('assets/js/shared/misc.js') }}"></script>
     <script src="{{ asset('assets/js/shared/jquery.cookie.js') }}" type="text/javascript"></script>
-  @stack('js')
+    @stack('js')
 </html>

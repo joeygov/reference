@@ -11,8 +11,6 @@
             @include('common._sidemenu')
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <!--title_header-->
-                    @include('common._titleheader')
                     <div id="main_content">
                         @yield('maincontent')
                     </div>
