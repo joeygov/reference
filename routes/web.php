@@ -21,6 +21,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/login', 'AuthController@index')->name('login');
     Route::post('/login', 'LoginController@store');
 
-    Route::get('/entryPage', 'EntryPageController@entryPage')->name('entryPage');
+    Route::get('/entry_page', 'EntryPageController@entryPage')->name('entryPage');
+    Route::post('/captureImage', 'EntryPageController@saveImage')->name('capture_Image');
+    Route::get('/modal', 'EntryPageController@modal')->name('modal');
 });
 

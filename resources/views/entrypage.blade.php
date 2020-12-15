@@ -1,120 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
+    <title>Capture webcam image with php and jquery - ItSolutionStuff.com</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-
-<body  onload=display_ct();>
-    <div class="card" style="background-color:Ivory">
-        <div class="timer">
-            <h1>TELE-NET TIME TRACKER</h1>
-            <h1 id="time"><h1>
-        </div>
-        <div id="camera" >
-        </div>
-        <div class="idAsk">
-            <input placeholder="Employee ID" type="text" id="inputID">
-            <div class="buttons">
-                <button class="in" id="in" data-target="#myModal" data-toggle="modal" onclick="snapshot(); queryId()">In</button>
-                <button class="out" id="in">Out</button>
+<body onload=display_ct();>
+<div class="container">
+    <form method="POST" action="{{url('captureImage')}}">
+        @csrf
+        <center>
+        <div class="col-md-12 text-center">
+                    <img src="com_logo clear.gif">
+            </div>
+            <div class="timer">
+                <h2 id ="date"></h2>
+                <h2 id="time"></h2>
+            </div>
+        </center>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="idAsk">
+                    <input placeholder="Employee ID" type="text" id="inputID"><br><br>
+                </div>
+                <div class="buttons">
+                    <input id="in" type=button  value="IN" onClick="take_snapshot();">
+                    <input id ="out" type=button value="OUT" onclick="window.location='{{route('modal')}}'" >
+                    <input type="hidden" name="image" class="image-tag">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="my_camera"></div>
+            </div>
+            <div class="col-md-12 text-center" style="margin-top:10px;">
+                <button class="btn btn-success">Submit</button>
             </div>
         </div>
-        <p class="reminder" style="margin-top:70px;">Please make sure face is facing the camera.</p>
-    </div>
-    <div id="snapShot">
-    </div>
-</body>
-
-</html>
+        <br>
+        <center>
+            <h5>Make sure face is facing the camera.</h5>
+        </center>
+    </form>
+</div>
 <style>
-    body {
-        background-image: url("https://industrywired.com/wp-content/uploads/2020/03/Here_are-Top-10-Emerging-Technologies-Worth-Investing-in-for-2020.jpeg");
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    body{
+        background-color: #6d99f2;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
-    h1 {
+    form{
+
+        background-color: #e1e2ed;
+        margin-top:2%; 
+        margin-left:100px;
+        border-radius:10px;
+        display: center;
+        width:80%;
+
+    }
+    img{
+        margin-top:20px; 
+        width:200px;
+        height:150px;
+    }
+
+    h1{
         font-weight: bold;
     }
-
-    .reminder {
-        margin-top: 5%;
-        text-align: center;
-        font-weight: bold;
+    h5{
+        padding-bottom:30px;
     }
 
-    #camera {
+    #in{
+        float:left;
+        background-color: #2a7ddb;
+        outline: none; border: none; 
+        border-radius:10px
+    }
+    #out{
+        float:right; 
+        background-color:#e3403d; 
+        border-radius:10px: none; 
+        border: none; 
+        border-radius:10px
+    }
+
+    #my_camera {
         text-align: center;
-        float: right;
-        width: 30%;
-        border: 1px solid #000000;
-        height: 250px;
-        margin-right: 8%;
-        background-repeat: no-repeat;
+        margin-top:0%;
+        float:left;
+        margin-left:100px;
+        /* margin-left:10px; */
+        width: 50%;
+        height: 360px;
+        margin-left: 5%;
     }
 
     .idAsk {
-        width: 80%;
-        margin-left: 8%;
-        margin-bottom: 10px;
-    }
-
-    button {
-        font-size: 20px;
-        padding: 5px;
-        width: 40%;
-        margin: 5%;
-        border-radius: 10px;
-        outline: none;
-        border: none;
-    }
-
-    .in {
-        background-color: rgb(58, 104, 255);
-    }
-
-    .in:active {
-        background-color: rgb(53, 77, 155);
-    }
-
-    .out {
-        background-color: rgb(255, 89, 89);
-    }
-
-    .out:active {
-        background-color: rgb(189, 69, 69);
+        width: 100%;
+        margin-left: 0%;
+        text-align: center;
     }
 
     .buttons {
-        width: 50%;
-        margin-left: 8%;
-        margin-top:10px;
+        width: 40%;
+        margin-left: 30%;
+        padding-top:20px;
     }
 
     .timer {
         width: 100%;
-        height: 200px;
+        height: 100px;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
         padding: 10px;
-    }
-
-    .card {
-        margin-top: 5%;
-        overflow: auto;
-        height: auto;
-        width: 70%;
-        padding: 30px;
-        border: 1px solid #000000;
-        margin-left: auto;
-        margin-right: auto;
+        font-weight: bold;
     }
 
     input {
@@ -122,79 +125,68 @@
         width: 50%;
         padding: 15px;
     }
+
     .modal-dialog {
         margin-top: 300px;
     }
+
     #myModal {
         background-color: rgba(177, 177, 177, 0.8);
     }
 </style>
+  
+<!-- Configure a few settings and attach camera -->
+<script language="JavaScript">
+    Webcam.set({
+        width: 250,
+        height: 200,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+  
+    Webcam.attach( '#my_camera' );
+  
+    function take_snapshot() 
+    {
+        Webcam.snap( function(data_uri) {
+        $(".image-tag").val(data_uri);
+        //document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+        console.log("snappy");
+        //alert("fdfhsdfjs");
+        });
+    }
 
-<script>
-
-function display_c(){
+    function display_c()
+    {
     var refresh=1000; // Refresh rate in milli seconds
     mytime=setTimeout('display_ct()',refresh);
-}
-//display currenttime
-function display_ct() {
-    var x = new Date()
-    var hours = x.getHours();
-    var minutes = x.getMinutes();
-    var seconds = x.getSeconds();
-    var ampm = hours <= 12 ? 'AM' : 'PM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' +seconds : seconds;
-    var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-    document.getElementById('time').innerHTML = currentTime;
-    display_c();
- }
+    }
 
- function ok(){
-     location.reload();
- }
+    //display currenttime
+    function display_ct() {
+        var months = [ "January", "February", "March", "April", "May", "June", 
+           "July", "August", "September", "October", "November", "December" ];
 
-//setting webcam
-//  Webcam.set({
-//         width: 180,
-//         height: 194.38,
-//         image_format: 'jpeg',
-//         jpeg_quality: 50
-//     });
-//     Webcam.attach('#camera');  
+        var x = new Date()
+        var month =months[ x.getMonth()];
+        var hours = x.getHours();
+        var minutes = x.getMinutes();
+        var seconds = x.getSeconds();
+        var date =month +" "+ x.getDate() + ", " + x.getFullYear();
+        var ampm = hours <= 12 ? 'AM' : 'PM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' +seconds : seconds;
+        var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+        document.getElementById('date').innerHTML = date;
+        document.getElementById('time').innerHTML = currentTime;
+        display_c();
+    }
 
-// //display captured image
-// function snapshot(){
-//     Webcam.snap(function (data_uri) {
-//             document.getElementById('snapShot').innerHTML = 
-//                 '<img src="' + data_uri + '" width="70px" height="50px" />';
-//         });
-//     $('#camera').fadeOut('quick');
-//     $('#camera').fadeIn('quick');
-      
-// }
-
+    function ok(){
+        location.reload();
+    }
 </script>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog" style="width:500px; height:600px; position-align:center;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h1 class="modal-title">TIME IN</h1>
-            </div>
-            <div class="modal-body">
-                <p>ORAS KUNG KANUS_A NILOGIN<p id="inputed"></p>.</p>
-            </div>
-            <div class="modal-footer">
-                <div class="btn-group">
-                    <button onclick ="ok()">OK</button>
-                    <button>Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</body>
+</html>
