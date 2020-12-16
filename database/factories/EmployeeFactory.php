@@ -28,6 +28,7 @@ class EmployeeFactory extends Factory
             'last_name' => $this->faker->lastname,
             'user_role' => $this->faker->randomElement([Employee::USER, Employee::WFM, Employee::ADMIN, Employee::REPORT_MANAGER]),
             'email' => $this->faker->unique()->safeEmail,
+            'is_wfh' => $this->faker->randomElement([true, false]),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ];
