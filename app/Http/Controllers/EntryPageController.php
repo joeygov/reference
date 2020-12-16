@@ -14,8 +14,12 @@ class EntryPageController extends Controller
     public function modal(){
         return view('modal');
     }
+
+    public function fingerprint(){
+        return view('fingerprint');
+    }
     
-    public function saveImage(Request $request)
+    public function saveImage()
     {
         $img = $_POST['image'];
         $folderPath = "C:/Users/develop/CebuTele-Net TimeTracker/cebutele_timetracker/public/";
@@ -24,14 +28,12 @@ class EntryPageController extends Controller
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
         $image_base64 = base64_decode($image_parts[1]);
-        $current = date('YmdHms');
+        $current = date('mYdmHs');
         $fileName = $current . '.png';
         $file = $folderPath . $fileName;
         file_put_contents($file, $image_base64);
         return back()
         ->with('success','You have successfully upload image.');
-
-        return redirect('login');
     }
 
 }

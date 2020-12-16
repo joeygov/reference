@@ -35,5 +35,5 @@
     <script src="{{ asset('assets/js/shared/off-canvas.js') }}"></script>
     <script src="{{ asset('assets/js/shared/misc.js') }}"></script>
     <script src="{{ asset('assets/js/shared/jquery.cookie.js') }}" type="text/javascript"></script>
-  @stack('js')
+@stack('js')
 </html>
