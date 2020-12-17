@@ -10,11 +10,6 @@ class EntryPageController extends Controller
     {
         return view('entrypage');
     }
-
-    public function modal(){
-        return view('modal');
-    }
-
     public function fingerprint(){
         return view('fingerprint');
     }

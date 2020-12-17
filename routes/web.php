@@ -23,7 +23,6 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
     Route::get('/entry_page', 'EntryPageController@entryPage')->name('entryPage');
     Route::post('/captureImage', 'EntryPageController@saveImage')->name('capture_Image');
-    Route::get('/modal', 'EntryPageController@modal')->name('modal');
     Route::get('/fingerprint', 'EntryPageController@fingerprint')->name('fingerprint');
 });
 
