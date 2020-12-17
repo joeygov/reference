@@ -18,7 +18,7 @@
             <img src="com_logo clear.gif">
         </div>
         <div class="timer">
-            <h1 id ="date"></h1>
+            <center> <input id="toggle-one" checked type="checkbox"></center>
             <h1 id="time"></h1>
         </div>
         <br>
@@ -26,16 +26,34 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="message">
-                   alert message neh aria
+                    <span>alert message neh aria</span>
                 </div>
-                <br>
-                <input id ="in" type=button value="TIME IN">
+                <center>
+                <h1 id ="date"></h1>
+                </center>
                 <br>
             </div>  
         </div>
     </form>
 </div>
+    <!-- <center><input type="checkbox" value="TIME IN" placeholder="time in"></center> -->
 <style>
+    input {
+        -webkit-appearance: none;
+        position: relative;
+        width: 20%;
+        height:60px;
+        background-color:#e0221b;
+        border-radius: 10px;
+        outline: none;
+        box-shadow: 0.5px 1px 2px 0.5px black;
+    }
+
+    input:checked {
+        label: "TIME OUT";
+        background-color:#173de8;
+    }
+
     body{
         background-color: #5f91f5;
         font-family: Arial, Helvetica, sans-serif;
@@ -44,7 +62,7 @@
     form{
         background-color: #e1e2ed;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 2);
-        margin-top:10%; 
+        margin-top:5%; 
         margin-left:15%;
         border-radius:10px;
         width:70%;
@@ -61,24 +79,13 @@
         font-weight: bold;
     }
 
-    #in{
-        float:right; 
-        margin-right:40%;
-        height:60px;
-        background-color:#2c6ade; 
-        border-radius:10px: none; 
-        border: none; 
-        border-radius:10px;
-        width:20%;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-
     .message {
         width: 100%;
         height:60px;
         margin-left: 0%;
         text-align: center;
         padding-top:5px;
+        font-size:18px;
     }
     
     .timer {
@@ -89,10 +96,6 @@
         text-align: center;
         font-weight: bold;
         font-size:40;
-    }
-
-    .modal-dialog {
-        margin-top: 0px;
     }
 
 </style>
@@ -131,6 +134,9 @@
     function ok(){
         location.reload();
     }
+    $(function() {
+    $('#toggle-one').bootstrapToggle();
+  })
 </script>
 </body>
 </html>

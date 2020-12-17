@@ -42,15 +42,14 @@
                 <img src="com_logo clear.gif">
         </div>
             <div class="timer">
-                <h2 id ="date"></h2>
-                <h2 id="time"></h2>
+                <h3 id ="date"></h3>
+                <h3 id="time"></h3>
             </div>
-            <br>
         </center>
         <div class="row">
             <div class="col-md-6">
                 <div class="idAsk">
-                    <input placeholder="Employee ID" type="text" name="employee_id" id="inputId"><br><br>
+                    <input placeholder="Employee ID" type="text" name="employee_id" id="inputId">
                 </div>
                 <input id="in" type=button  value="IN" onClick="take_snapshot();" data-toggle="modal" data-target="#myModal" >
                 <input id ="out" type=button value="OUT" data-toggle="modal" data-target="#myModal" >
@@ -68,7 +67,7 @@
 </div>
 <style>
     body{
-        background-color: #5f91f5;
+        background-color: #edf1f2;
         font-family: Arial, Helvetica, sans-serif;
     }
 
@@ -79,34 +78,40 @@
         margin-top:2%; 
         margin-left:15%;
         border-radius:10px;
-        /* display: center; */
+        display: center;
         width:70%;
-
     }
+
     img{
         margin-top:20px; 
         width:150px;
         height:100px;
     }
 
-    h1{
+    h3{
         font-weight: bold;
+        font-size: 24;
     }
 
     h5{
-        padding-bottom:30px;
+        padding-bottom:10px;
+        font-size:24;
     }
 
     button{
         width:80px;
     }
 
+    #inputId{
+        span:80px;
+    }
+
     #ok{
-        background-color:#2a7ddb
+        background-color:#2a7ddb;
     }
 
     #cancel{
-        background-color:#e3403d
+        background-color:#e3403d;
     }
 
     #in{
@@ -117,7 +122,8 @@
         border-radius:10px;
         width:20%;
         margin-top:0px;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 2px 3px 5px 2px black;
+        /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     }
     #out{
         float:right; 
@@ -127,7 +133,8 @@
         border: none; 
         border-radius:10px;
         width:20%;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 2px 3px 5px 2px black;
+        /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     }
 
     #my_camera {
@@ -145,11 +152,11 @@
 
     .idAsk {
         width: 100%;
-        height:50%;
+        height:60%;
         margin-left: 0%;
         text-align: center;
         /* background-color:yellow; */
-        padding-top:7px;
+        /* padding-top:7px; */
     }
     .timer {
         width: 100%;
@@ -157,7 +164,7 @@
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        padding: 10px;
+        /* padding: 5px; */
         font-weight: bold;
         font-size:40;
         /* background-color:green; */
@@ -193,11 +200,6 @@
     function take_snapshot() 
     {
         Webcam.snap( function(data_uri) {
-        var emp_Id = $("#inputId").val();
-        if(emp_Id ==""){
-            return false;
-        }
-        console.log(emp_Id);
         $(".image-tag").val(data_uri);
         // document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
         console.log("snappy");
