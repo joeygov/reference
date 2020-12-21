@@ -16,12 +16,10 @@
                         <h4 class="modal-title">TIME IN</h4>
                     </div>          
                 <!-- Modal body -->
-                    <center>
                     <div class="modal-body">
                         <h5>TIME</h5>
                         <h5>Employee Name:</h5>
                     </div>
-                    </center>
                 <!-- Modal footer -->
                     <div class="modal-footer">
                         <button class="btn btn-success">OK</button>
@@ -31,7 +29,6 @@
             </div>
         </div>
          <!-- Modal ENDS -->
-        <center>
         <div class="col-md-12 text-center">
                 <img src="com_logo clear.gif">
         </div>
@@ -39,7 +36,6 @@
                 <h3 id ="date"></h3>
                 <h3 id="time"></h3>
             </div>
-        </center>
         <div class="row">
             <div class="col-md-6">
                 <div class="idAsk">
@@ -54,9 +50,7 @@
             </div>
         </div>
         <br>
-        <center>
             <h5>Make sure face is facing the camera.</h5>
-        </center>
     </form>
 </div>
 @endsection()
