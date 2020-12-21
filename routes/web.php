@@ -14,15 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return redirect()->route('login');
 });
 
 Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/login', 'AuthController@index')->name('login');
+<<<<<<< HEAD
     Route::post('/login', 'LoginController@store');
 
     Route::get('/entry_page', 'EntryPageController@entryPage')->name('entryPage');
     Route::post('/captureImage', 'EntryPageController@saveImage')->name('capture_Image');
     Route::get('/fingerprint', 'EntryPageController@fingerprint')->name('fingerprint');
+=======
+    Route::post('/login', 'AuthController@store');
+
+    Route::middleware('auth:user')->group(function () {
+        Route::get('/home', 'UserController@index')->name('home');
+        Route::post('/logout', 'AuthController@logOut')->name('logout');
+    });
+>>>>>>> 46c64f30d511c47f747158bf53441efd8c551c93
 });
 

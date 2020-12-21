@@ -6,6 +6,18 @@ use Illuminate\Foundation\Auth\User;
 
 class Employee extends User
 {
+    const ROLE = [
+        1 => 'USER',
+        2 => 'WFM',
+        3 => 'ADMIN',
+        4 => 'REPORT_MANAGER',
+    ];
+
+    const USER_STATUS = [
+        'ACTIVE' => 1,
+        'LOCK' => 2,
+    ];
+
     protected $fillable = [
         'emp_id',
         'user_role',
