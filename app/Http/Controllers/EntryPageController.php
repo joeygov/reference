@@ -17,8 +17,7 @@ class EntryPageController extends Controller
     public function saveImage()
     {
         $img = $_POST['image'];
-        $folderPath = "C:/Users/develop/CebuTele-Net TimeTracker/cebutele_timetracker/public/";
-        
+        $folderPath = "C:\Users\develop\CebuTele-Net TimeTracker\cebutele_timetracker\public";
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
@@ -27,6 +26,7 @@ class EntryPageController extends Controller
         $fileName = $current . '.png';
         $file = $folderPath . $fileName;
         file_put_contents($file, $image_base64);
+    
         return back()
         ->with('success','You have successfully upload image.');
     }

@@ -32,4 +32,6 @@
 </div>
 @endsection
 </body>
-
+@push('js')
+<script src="{{ asset('assets/js/entrypage/entrypage.js') }}" type="text/javascript"></script>
+@endpush

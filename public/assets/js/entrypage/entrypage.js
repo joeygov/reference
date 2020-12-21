@@ -10,12 +10,11 @@ function display_ct() {
     var months = [ "January", "February", "March", "April", "May", "June", 
         "July", "August", "September", "October", "November", "December" ];
 
-    var x = new Date()
-    var month =months[ x.getMonth()];
+    var x = new Date();
+    var date =months[ x.getMonth()] +" "+ x.getDate() + ", " + x.getFullYear();
     var hours = x.getHours();
     var minutes = x.getMinutes();
     var seconds = x.getSeconds();
-    var date =month +" "+ x.getDate() + ", " + x.getFullYear();
     var ampm = hours <= 12 ? 'AM' : 'PM';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'

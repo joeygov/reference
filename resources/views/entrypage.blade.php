@@ -3,6 +3,9 @@
 @push('css')
 <link rel="stylesheet" href="{{ asset('assets/css/entrypage/entrypage.css') }}">
 @endpush
+@push('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+@endpush
 @section('content')
 <body onload=display_ct();>
 <div class="container">
@@ -60,3 +63,10 @@
     </form>
 </div>
 @endsection()
+</body>
+@push('js')
+<script src="{{ asset('assets/js/entrypage/camera.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/entrypage/entrypage.js') }}" type="text/javascript"></script>
+@endpush
+
+
