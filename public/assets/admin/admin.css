@@ -1,0 +1,33 @@
+.top{
+    margin-left: 86%;
+}
+
+.custom-select{
+    width: 65px !important;
+}
+
+.btn-fw{
+    height: 45px;
+}
+
+table.dataTable thead tr {
+    background: linear-gradient(to top, #5768f3, #1c45ef)
+  }
+
+.download_csv{
+    margin-top: 25px;
+    float: right;
+    height: 29px;
+}
+
+div.dt-buttons {
+    position: relative;
+    float: right !important;
+    margin-top: 75px !important;
+    left: 155px !important;
+}
+
+.buttons-csv{
+    background: linear-gradient(to top, #5768f3, #1c45ef) !important;
+    color: white !important;
+}

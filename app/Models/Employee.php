@@ -37,8 +37,59 @@ class Employee extends User
         'emp_image',
         'fingerprint',
     ];
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    protected $appends = [
+        'user_roles',
+        'emp_statuses',
+        'user_statuses'
+    ];
+
+    const STATUS = [
+        1 => 'Active',
+        2 => 'Block',
+    ];
+
+    const TYPE = [
+        1 => 'Regular',
+        2 => 'Probation',
+    ];
+
+    public function getUserRolesAttribute()
+    {
+        foreach(self::ROLE as $key => $role) {
+            if ($this->user_role == $key) {
+                return $role;
+            }
+        }
+    }
+
+    public function getEmpStatusesAttribute()
+    {
+        foreach(self::TYPE as $indx => $user_type) {
+            if ($this->emp_status == $indx) {
+                return $user_type;
+            }
+        }
+    }
+
+    public function getUserStatusesAttribute()
+    {
+        foreach (self::STATUS as $key => $status) {
+            if ($this->user_status == $key) {
+                return $status;
+            }
+        }
+    }
+
+
+    public function account()
+    {
+        return $this->belongsTo('\App\Models\Account');
+    }
+
 }
