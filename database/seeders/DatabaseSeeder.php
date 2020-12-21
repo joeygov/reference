@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Employee;
+use Database\Factories\EmployeeFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Employee::factory(10)->create();
+        $factory = new EmployeeFactory();
+        for ($i = 0; $i < 10; ++$i) {
+            $employee = new Employee($factory->definition());
+            $employee->save();
+        }
     }
 }
