@@ -36,9 +36,11 @@ class AttendanceManager
             ->first();
 
         return $attendance ? true : false;
+
+        
     }
 
-    private function setEmployeeTimeIn($employee_id, $time_in)
+    private function setEmployeeTimeIn($employee_id, $time_in, $image_link = null)
     {
         $attendance = new Attendance();
         $attendance->employee_id = $employee_id;
@@ -46,8 +48,9 @@ class AttendanceManager
         $attendance->save();
     }
 
-    public function timeIn($employee_id, $time_in, $image)
+    public function timeIn($employee_id, $time_in, $image = null)
     {
+        $image_link = '';
         $response = [
             'status' => 'error',
             'message' => 'Error',
@@ -59,12 +62,10 @@ class AttendanceManager
         } else {
             if ($image) {
                 //call method to save image here;
-                $image_link = '';
-                $attendance->time_in_image = $image_link;
+                $image_link = 'some link here';
             }
 
-            $attendance->time_in = $time_in;
-            $attendance->save();
+            $this->setEmployeeTimeIn($employee_id, $time_in, $image_link);
 
             $response['status'] = 'success';
             $response['message'] = 'Successful Time In';
@@ -90,8 +91,10 @@ class AttendanceManager
             }
             $attendance->time_out = $time_out;
             $attendance->save();
+            $response['message'] = 'Successful Time out';
         } else {
             $response['message'] = 'No time in. Please time in first.';
+            $response['status'] = 'success';
         }
 
         return $response;
