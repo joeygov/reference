@@ -13,6 +13,11 @@ class Employee extends User
         4 => 'REPORT_MANAGER',
     ];
 
+    const USER_STATUS = [
+        'ACTIVE' => 1,
+        'LOCK' => 2,
+    ];
+
     protected $fillable = [
         'emp_id',
         'user_role',

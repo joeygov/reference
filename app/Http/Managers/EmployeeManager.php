@@ -1,11 +1,36 @@
 <?php
 
 namespace App\Http\Managers;
+
 use App\Models\Employee;
 
-class EmployeeManager{
+class EmployeeManager
+{
+    public function __construct()
+    {
+    }
 
-    public function searchEmployee($request = null, $type = null)
+    public function getEmployeeByEmpId($emp_id)
+    {
+        return Employee::where('emp_id', $emp_id)->first();
+    }
+
+    public function getEmployee($employee_id)
+    {
+        return Employee::find($employee_id)->first();
+    }
+
+    public function getEmployeeByBio($bio)
+    {
+        return new Employee();
+    }
+
+    public function isUserLock($employee_id)
+    {
+        return  Employee::USER_STATUS['USER_STATUS'] == Employee::where('id', $employee_id)->first()->user_status;
+    }
+
+    public function searchEmployee($request = null)
     {
         try {
             $employee_id = empty($request->employee_id) ? '' : $request->employee_id;
@@ -50,5 +75,4 @@ class EmployeeManager{
 
         return  $query->get()->toArray();
     }
-
 }
