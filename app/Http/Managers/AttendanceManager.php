@@ -27,6 +27,18 @@ class AttendanceManager
             ->whereDate('time_in', $date->format('Y-m-d'))->first();
     }
 
+    public function getLatestAttendance($employee_id)
+    {
+        $attendance = new Attendance();
+        $latest = Attendance::where('employee_id', $employee_id)
+            ->orderBy('time_in', 'DESC')->first();
+        if ($latest && is_null($latest->time_out)) {
+            $attendance = $latest;
+        }
+
+        return $attendance;
+    }
+
     public function didNotTimeOut($employee_id)
     {
         $attendance = Attendance::where('employee_id', $employee_id)
@@ -36,8 +48,6 @@ class AttendanceManager
             ->first();
 
         return $attendance ? true : false;
-
-        
     }
 
     private function setEmployeeTimeIn($employee_id, $time_in, $image_link = null)
