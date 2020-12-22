@@ -27,6 +27,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
     Route::middleware('auth:user')->group(function () {
         Route::get('/home', 'UserController@index')->name('home');
+        Route::post('/wfhtimeIn', 'UserController@timeIn')->name('wfhtimein');
         Route::post('/logout', 'AuthController@logOut')->name('logout');
     });
 });

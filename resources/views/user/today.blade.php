@@ -12,9 +12,12 @@ Today's Tracker
     @if($show_time_in_btn)
         <div class="time-in-wfh center">
             <div class="flex-container-row center">
-                <button type="button" class="btn btn-primary  btn-lg">
-                    TIME IN
-                </button>
+                <form method="POST" action="{{route('wfhtimein')}}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary  btn-lg">
+                        TIME IN
+                    </button>
+                </form>
             </div>
         </div>
     @else    
