@@ -26,7 +26,9 @@ Today's Tracker
                 Time In
             </div>
             <div class="grow-3">
-                {{date("h:i:s A")}}
+                @if($attendance->time_in)
+                    {{$attendance->time_in}}
+                @endif
             </div>
         </div>
         <div class="flex-container-row space-between">
@@ -35,9 +37,16 @@ Today's Tracker
                     1st Break Start: 
                 </div>
                 <div class="grow-1">
-                    <button type="button" class="btn btn-primary">
-                        START
-                    </button>
+                    @if(in_array('break1_start',$active_break_btns))
+                        <form method="POST" action="{{route('b1start')}}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">
+                                START
+                            </button>
+                        </form>
+                    @else
+                        {{$attendance->break1_start}}
+                    @endif
                 </div>
             </div>
             <div class="flex-container-row grow-1 space-between">
@@ -45,75 +54,135 @@ Today's Tracker
                     1st Break End:
                 </div>
                 <div class="grow-1">
-                    <button type="button" class="btn btn-danger">
-                        END
-                    </button>
+                    @if(in_array('break1_end',$active_break_btns))
+                    <form method="POST" action="{{route('b1end')}}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">
+                            END
+                        </button>
+                    </form>
+                    @else
+                        {{$attendance->break1_end}}
+                    @endif
                 </div>
             </div>
         </div>
         <div class="flex-container-row space-between">
+            
             <div class="grow-1">2nd Break Start: 
             </div>
             <div class="grow-1">
-                <button type="button" class="btn btn-primary">
-                    START
-                </button>
+                @if(in_array('break2_start',$active_break_btns))
+                <form method="POST" action="{{route('b2start')}}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">
+                        START
+                    </button>
+                </form>
+                @else
+                    {{$attendance->break2_start}}
+                @endif
             </div>
             <div class=" grow-1">2nd Break End:
             </div>
+            
             <div class="grow-1">
-                <button type="button" class="btn btn-danger">
-                    END
-                </button>
+                @if(in_array('break2_end',$active_break_btns))
+                <form method="POST" action="{{route('b2end')}}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">
+                        END
+                    </button>
+                </form>
+                @else
+                    {{$attendance->break2_end}}
+                @endif
             </div>
+
+
         </div>
         <div class="flex-container-row space-between">
             <div class=" grow-1">3rd Break Start: 
             </div>
             <div class="grow-1">
-                <button type="button" class="btn btn-primary">
-                    START
-                </button>
+                @if(in_array('break3_start',$active_break_btns))
+                <form method="POST" action="{{route('b3start')}}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">
+                        START
+                    </button>
+                </form>
+                @else
+                    {{$attendance->break3_start}}
+                @endif
             </div>
             <div class=" grow-1">3rd Break End:
             </div>
             <div class="grow-1">
-                <button type="button" class="btn btn-danger">
-                    END
-                </button>
+                @if(in_array('break3_end',$active_break_btns))
+                    <form method="POST" action="{{route('b3end')}}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">
+                            END
+                        </button>
+                    </form>
+                @else
+                    {{$attendance->break3_end}}
+                @endif
             </div>
         </div>
         <div class="flex-container-row space-between">
             <div class=" grow-1">4th Break Start: 
             </div>
             <div class="grow-1">
-                <button type="button" class="btn btn-primary">
-                    START
-                </button>
+                @if(in_array('break4_start',$active_break_btns))
+                <form method="POST" action="{{route('b4start')}}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">
+                        START
+                    </button>
+                </form>
+                @else
+                    {{$attendance->break4_start}}
+                @endif
             </div>
             <div class=" grow-1">4th Break End:
             </div>
             <div class="grow-1">
-                <button type="button" class="btn btn-danger">
-                    END
-                </button>
+                @if(in_array('break4_end',$active_break_btns))
+                <form method="POST" action="{{route('b4end')}}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">
+                        END
+                    </button>
+                </form>
+                @else
+                    {{$attendance->break4_end}}
+                @endif
             </div>
         </div>
+        @if($user->is_wfh===false || ($user->is_wfh && $attendance->time_out) || ($user->is_wfh && !(in_array('out',$active_break_btns))))
         <div class="flex-container-row flex-start">
             <div class="grow-1">
                 Time Out
             </div>
             <div class="grow-3">
-                {{date("h:i:s A")}}
+                @if($attendance->time_out)
+                {{$attendance->time_out}}
+                @endif
             </div>
         </div>
+        @endif
     @endif
 
-    @if($show_time_out_btn)
+    @if($user->is_wfh && is_null($attendance->time_out) && in_array('out',$active_break_btns))
         <div class="flex-container-row center">
-            <button type="button" class="btn btn-primary  btn-lg">
-                TIME OUT
-            </button>
+            <form method="POST" action="{{route('wfhtimeout')}}">
+                @csrf
+                <button type="submit" class="btn btn-primary  btn-lg">
+                    TIME OUT
+                </button>
+            </form>
         </div>
     @endif
 </div>

@@ -16,7 +16,7 @@ class AttendanceManager
     public function getActiveAttendance($employee_id)
     {
         return Attendance::where('employee_id', $employee_id)
-            ->whereDate('time_in', $date->format('Y-m-d'))
+            ->whereNotNull('time_in')
             ->whereNull('time_out')
             ->first();
     }
