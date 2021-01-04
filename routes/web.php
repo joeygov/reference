@@ -47,25 +47,14 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/list','EmployeeController@index')->name('list');
                 Route::get('/search','EmployeeController@search')->name('search');
                 Route::get('/add','EmployeeController@create')->name('create');
-                Route::post('/add','EmployeeController@add')->name('add');
+                Route::get('/edit/{employee}','EmployeeController@edit')->name('edit');
+                Route::get('/delete/{employee}','EmployeeController@destroy')->name('destroy');
+                Route::post('/store','EmployeeController@store')->name('add');
+                Route::post('/image', 'EmployeeController@updateImage');
+                Route::post('/update/{employee}','EmployeeController@update')->name('update');
             });
         });
     });
 
-    Route::namespace('Admin')->prefix('admin')->group(function ()
-    {
-        Route::prefix('employee')->name('employee.')->group(function ()
-        {
-            Route::get('/list','EmployeeController@index')->name('list');
-            Route::get('/search','EmployeeController@search')->name('search');
-            Route::get('/add','EmployeeController@create')->name('create');
-            Route::get('/edit/{employee}','EmployeeController@edit')->name('edit');
-            Route::get('/delete/{employee}','EmployeeController@destroy')->name('destroy');
-            Route::post('/store','EmployeeController@store')->name('add');
-            Route::post('/image', 'EmployeeController@updateImage');
-            Route::post('/update/{employee}','EmployeeController@update')->name('update');
-
-        });
-    });
 
 });
