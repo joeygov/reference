@@ -321,7 +321,7 @@
                                     <div class="col-md-3 cancel_butt">
                                         <div class="form-group row">
                                             <div class="col-sm-12">
-                                                <button class="btn btn-primary btn-rounded btn-fw" type="button">Cancel</button>
+                                                <a href="{{ route('employee.list') }}" class="btn btn-primary btn-rounded btn-fw cancel_btn" type="button">Cancel</a>
                                             </div>
                                         </div>
                                     </div>
