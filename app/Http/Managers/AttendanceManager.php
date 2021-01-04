@@ -84,7 +84,7 @@ class AttendanceManager
         return $response;
     }
 
-    public function timeOut($employee_id, $time_out, $image)
+    public function timeOut($employee_id, $time_out, $image = null)
     {
         $response = [
             'status' => 'error',
