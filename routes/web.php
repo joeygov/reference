@@ -35,5 +35,14 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::post('/wfhtimeOut', 'UserController@timeOut')->name('wfhtimeout');
 
         Route::post('/logout', 'AuthController@logOut')->name('logout');
+
+        Route::namespace('Admin')->prefix('admin')->group(function ()
+        {
+            Route::prefix('employee')->name('employee.')->group(function ()
+            {
+                Route::get('/list','EmployeeController@index')->name('list');
+                Route::get('/search','EmployeeController@search')->name('search');
+            });
+        });
     });
 });

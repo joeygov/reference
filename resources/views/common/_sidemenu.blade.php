@@ -32,5 +32,47 @@
           <span class="menu-title">My Calendar Tracker</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">My Information</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">Attendances</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('employee.list')}}">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">Employee</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">Accounts</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">Over Breaks</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">Schedules</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">Logout</span>
+        </a>
+      </li>
     </ul>
   </nav>
