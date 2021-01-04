@@ -30,7 +30,7 @@ class EmployeeManager
 
     public function isUserLock($employee_id)
     {
-        return  Employee::USER_STATUS['USER_STATUS'] == Employee::where('id', $employee_id)->first()->user_status;
+        return  Employee::USER_STATUS['LOCK'] == Employee::where('id', $employee_id)->first()->user_status;
     }
 
     public function searchEmployee($request = null)
