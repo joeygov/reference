@@ -147,6 +147,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'emp_image' => 'Employee Image',
+        'emp_id' => 'Employee ID',
+        'hdmf_num' => 'Pag-ibig Number',
+        'sss_num' => 'SSS Number',
+        'philhealth_num' => 'PhilHealth Number',
+        'contact_num' => 'Contact Number',
+        'is_flex' => 'Fix/Flex Schedule'
+    ],
 
 ];

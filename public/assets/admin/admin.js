@@ -77,4 +77,8 @@ $(document).ready(function() {
         $('#user_status').val('');
         $(".search-employee").click();
     });
-} );
+
+    $(document).on('click', '#emp_add', function(){
+        localStorage.clear();
+    });
+});
