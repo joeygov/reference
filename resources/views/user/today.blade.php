@@ -3,11 +3,10 @@
 Today's Tracker
 @endsection
 @section('maincontent')
-
 <div class="main-content-column">
     <div class="flex-container-column">
         <div class="date-today">{{date("F d, Y")}}</div>
-        <div class="time-now">{{date("h:i:s A")}}</div>
+        <div class="time-now" id="time"></div>
     </div>
     @if($show_time_in_btn)
         <div class="time-in-wfh center">
@@ -187,4 +186,11 @@ Today's Tracker
     @endif
 </div>
 @endsection
-
+@push('js')
+<script>
+    $(function() {
+        display_ct();
+    });
+</script>
+<script src="{{ asset('assets/js/entrypage/entrypage.js') }}" type="text/javascript"></script>
+@endpush

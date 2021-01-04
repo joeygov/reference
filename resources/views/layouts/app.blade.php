@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css') }}" >
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.addons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/iconfonts/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/shared/style.css') }}">
-
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
@@ -38,5 +38,5 @@
     <script src="{{ asset('assets/js/shared/off-canvas.js') }}"></script>
     <script src="{{ asset('assets/js/shared/misc.js') }}"></script>
     <script src="{{ asset('assets/js/shared/jquery.cookie.js') }}" type="text/javascript"></script>
-    @stack('js')
+@stack('js')
 </html>

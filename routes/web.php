@@ -21,6 +21,10 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/login', 'AuthController@index')->name('login');
     Route::post('/login', 'AuthController@store');
 
+    Route::get('/entry_page', 'EntryPageController@entryPage')->name('entryPage');
+    Route::post('/captureImage', 'EntryPageController@saveImage')->name('capture_Image');
+    Route::get('/fingerprint', 'EntryPageController@fingerprint')->name('fingerprint');
+
     Route::middleware('auth:user')->group(function () {
         Route::get('/home', 'UserController@index')->name('home');
         Route::post('/wfhtimeIn', 'UserController@timeIn')->name('wfhtimein');
@@ -35,5 +39,14 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::post('/wfhtimeOut', 'UserController@timeOut')->name('wfhtimeout');
 
         Route::post('/logout', 'AuthController@logOut')->name('logout');
+
+        Route::namespace('Admin')->prefix('admin')->group(function ()
+        {
+            Route::prefix('employee')->name('employee.')->group(function ()
+            {
+                Route::get('/list','EmployeeController@index')->name('list');
+                Route::get('/search','EmployeeController@search')->name('search');
+            });
+        });
     });
 });
