@@ -112,10 +112,10 @@ class AttendanceManager
             }
             $attendance->time_out = $time_out;
             $attendance->save();
+            $response['status'] = 'success';
             $response['message'] = 'Successful Time out';
         } else {
             $response['message'] = 'No time in. Please time in first.';
-            $response['status'] = 'success';
         }
 
         return $response;
