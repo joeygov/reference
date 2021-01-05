@@ -22,18 +22,18 @@ Today's Tracker
     @else    
         <div class="flex-container-row flex-start">
             <div class="grow-1">
-                Time In
+                <span class="label">Time In </span>
             </div>
             <div class="grow-3">
                 @if($attendance->time_in)
-                    {{$attendance->time_in}}
+                    {{$attendance->time_in->format('g:i A')}}
                 @endif
             </div>
         </div>
         <div class="flex-container-row space-between">
             <div class="flex-container-row  grow-1 space-between">
                 <div class="grow-1">
-                    1st Break Start: 
+                    <span class="label"> 1st Break Start: </span>
                 </div>
                 <div class="grow-1">
                     @if(in_array('break1_start',$active_break_btns))
@@ -43,14 +43,14 @@ Today's Tracker
                                 START
                             </button>
                         </form>
-                    @else
-                        {{$attendance->break1_start}}
+                    @elseif ($attendance->break1_start)
+                        {{$attendance->break1_start->format('g:i A')}}
                     @endif
                 </div>
             </div>
             <div class="flex-container-row grow-1 space-between">
                 <div class="grow-1">
-                    1st Break End:
+                    <span class="label">1st Break End:</span>
                 </div>
                 <div class="grow-1">
                     @if(in_array('break1_end',$active_break_btns))
@@ -60,15 +60,16 @@ Today's Tracker
                             END
                         </button>
                     </form>
-                    @else
-                        {{$attendance->break1_end}}
+                    @elseif($attendance->break1_end)
+                        {{$attendance->break1_end->format('g:i A')}}
                     @endif
                 </div>
             </div>
         </div>
         <div class="flex-container-row space-between">
             
-            <div class="grow-1">2nd Break Start: 
+            <div class="grow-1">
+                <span class="label"> 2nd Break Start: </span>
             </div>
             <div class="grow-1">
                 @if(in_array('break2_start',$active_break_btns))
@@ -78,11 +79,12 @@ Today's Tracker
                         START
                     </button>
                 </form>
-                @else
-                    {{$attendance->break2_start}}
+                @elseif($attendance->break2_start)
+                    {{$attendance->break2_start->format('g:i A')}}
                 @endif
             </div>
-            <div class=" grow-1">2nd Break End:
+            <div class=" grow-1">
+                <span class="label">2nd Break End:</span>
             </div>
             
             <div class="grow-1">
@@ -93,15 +95,16 @@ Today's Tracker
                         END
                     </button>
                 </form>
-                @else
-                    {{$attendance->break2_end}}
+                @elseif($attendance->break2_end)
+                    {{$attendance->break2_end->format('g:i A')}}
                 @endif
             </div>
 
 
         </div>
         <div class="flex-container-row space-between">
-            <div class=" grow-1">3rd Break Start: 
+            <div class=" grow-1">
+                <span class="label">3rd Break Start: </span>
             </div>
             <div class="grow-1">
                 @if(in_array('break3_start',$active_break_btns))
@@ -111,11 +114,12 @@ Today's Tracker
                         START
                     </button>
                 </form>
-                @else
-                    {{$attendance->break3_start}}
+                @elseif($attendance->break3_start)
+                    {{$attendance->break3_start->format('g:i A')}}
                 @endif
             </div>
-            <div class=" grow-1">3rd Break End:
+            <div class=" grow-1">
+                <span class="label">3rd Break End:</span>
             </div>
             <div class="grow-1">
                 @if(in_array('break3_end',$active_break_btns))
@@ -125,13 +129,14 @@ Today's Tracker
                             END
                         </button>
                     </form>
-                @else
-                    {{$attendance->break3_end}}
+                @elseif($attendance->break3_end)
+                    {{$attendance->break3_end->format('g:i A')}}
                 @endif
             </div>
         </div>
         <div class="flex-container-row space-between">
-            <div class=" grow-1">4th Break Start: 
+            <div class=" grow-1">
+                <span class="label">4th Break Start: </span>
             </div>
             <div class="grow-1">
                 @if(in_array('break4_start',$active_break_btns))
@@ -141,11 +146,12 @@ Today's Tracker
                         START
                     </button>
                 </form>
-                @else
-                    {{$attendance->break4_start}}
+                @elseif($attendance->break4_start)
+                    {{$attendance->break4_start->format('g:i A')}}
                 @endif
             </div>
-            <div class=" grow-1">4th Break End:
+            <div class=" grow-1">
+                <span class="label">4th Break End:</span>
             </div>
             <div class="grow-1">
                 @if(in_array('break4_end',$active_break_btns))
@@ -155,19 +161,19 @@ Today's Tracker
                         END
                     </button>
                 </form>
-                @else
-                    {{$attendance->break4_end}}
+                @elseif($attendance->break4_end)
+                    {{$attendance->break4_end->format('g:i A')}}
                 @endif
             </div>
         </div>
         @if($user->is_wfh===false || ($user->is_wfh && $attendance->time_out) || ($user->is_wfh && !(in_array('out',$active_break_btns))))
         <div class="flex-container-row flex-start">
             <div class="grow-1">
-                Time Out
+                <span class="label">Time Out</span>
             </div>
             <div class="grow-3">
                 @if($attendance->time_out)
-                {{$attendance->time_out}}
+                {{$attendance->time_out->format('g:i A')}}
                 @endif
             </div>
         </div>
