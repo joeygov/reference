@@ -49,7 +49,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/add','EmployeeController@create')->name('create');
                 Route::get('/edit/{employee}','EmployeeController@edit')->name('edit');
                 Route::get('/delete/{employee}','EmployeeController@destroy')->name('destroy');
-                Route::post('/store','EmployeeController@store')->name('add');
+                Route::post('/store','EmployeeController@store')->name('store');
                 Route::post('/image', 'EmployeeController@updateImage');
                 Route::post('/update/{employee}','EmployeeController@update')->name('update');
             });

@@ -14,7 +14,7 @@
             <div class="col-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-sample" method="POST" action="{{ route('employee.add') }}" enctype="multipart/form-data">
+                        <form class="form-sample" method="POST" action="{{ route('employee.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="left_image">
                                 <div class="row py-4">
