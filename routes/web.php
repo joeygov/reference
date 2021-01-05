@@ -26,7 +26,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/fingerprint', 'EntryPageController@fingerprint')->name('fingerprint');
 
     Route::middleware('auth:user')->group(function () {
-        Route::get('/home', 'UserController@index')->name('home');
+        Route::get('/home/{response?}', 'UserController@index')->name('home');
         Route::post('/wfhtimeIn', 'UserController@timeIn')->name('wfhtimein');
         Route::post('/b1start', 'UserController@setB1Start')->name('b1start');
         Route::post('/b1end', 'UserController@setB1End')->name('b1end');
@@ -40,12 +40,10 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::post('/logout', 'AuthController@logOut')->name('logout');
 
-        Route::namespace('Admin')->prefix('admin')->group(function ()
-        {
-            Route::prefix('employee')->name('employee.')->group(function ()
-            {
-                Route::get('/list','EmployeeController@index')->name('list');
-                Route::get('/search','EmployeeController@search')->name('search');
+        Route::namespace('Admin')->prefix('admin')->group(function () {
+            Route::prefix('employee')->name('employee.')->group(function () {
+                Route::get('/list', 'EmployeeController@index')->name('list');
+                Route::get('/search', 'EmployeeController@search')->name('search');
             });
         });
     });
