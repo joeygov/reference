@@ -58,3 +58,7 @@ div#main_content{
 .grow-3{
     flex-grow:3;
 }
+
+.label{
+    font-weight: bold;
+}
