@@ -13,6 +13,17 @@ class AttendanceManager
         $this->empManager = $empManager;
     }
 
+    public function getAllAttendance($employee_id = null)
+    {
+        if ($employee_id) {
+            $attendance = Attendance::where('employee_id', $employee_id);
+        } else {
+            $attendance = Attendance::all();
+        }
+
+        return $attendance;
+    }
+
     public function getActiveAttendance($employee_id)
     {
         return Attendance::where('employee_id', $employee_id)
