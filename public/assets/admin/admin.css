@@ -31,3 +31,43 @@ div.dt-buttons {
     background: linear-gradient(to top, #5768f3, #1c45ef) !important;
     color: white !important;
 }
+
+.account_list{
+    width: 100%;
+}
+
+#acct_add{
+    padding: 15px;
+}
+
+#account_row{
+    margin-right: -82.5px;
+    margin-left: 175.5px;
+    width: 100%;
+}
+
+.card .card-header {
+    background: linear-gradient(to top, #5768f3, #1c45ef) !important;
+    padding: 10px;
+}
+
+.card .card-header p {
+    display: table;
+    margin: 0 auto;
+    font-size: 21px;
+    color: white;
+}
+
+.acc_name{
+    margin-left: 251px;
+}
+
+.btn_acct{
+    margin-left: 350px;
+    margin-top: 30px;
+    height: 30px;
+}
+
+.acct_cancel{
+    padding: 15px;
+}

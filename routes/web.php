@@ -47,6 +47,18 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/list','EmployeeController@index')->name('list');
                 Route::get('/search','EmployeeController@search')->name('search');
             });
+
+            Route::prefix('account')->name('account.')->group(function ()
+            {
+                Route::get('/list','AccountController@index')->name('list');
+                Route::get('/add','AccountController@create')->name('create');
+                Route::get('/search','AccountController@search')->name('search');
+                Route::get('/edit/{account}','AccountController@edit')->name('edit');
+                Route::get('/delete/{account}','AccountController@destroy')->name('delete');
+                Route::post('/store','AccountController@store')->name('store');
+                Route::post('/update/{account}','AccountController@update')->name('update');
+            });
+
         });
     });
 });
