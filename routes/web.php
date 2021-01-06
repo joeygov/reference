@@ -26,7 +26,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/fingerprint', 'EntryPageController@fingerprint')->name('fingerprint');
 
     Route::middleware('auth:user')->group(function () {
-        Route::get('/home', 'UserController@index')->name('home');
+        Route::get('/home/{response?}', 'UserController@index')->name('home');
         Route::post('/wfhtimeIn', 'UserController@timeIn')->name('wfhtimein');
         Route::post('/b1start', 'UserController@setB1Start')->name('b1start');
         Route::post('/b1end', 'UserController@setB1End')->name('b1end');
@@ -40,21 +40,27 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::post('/logout', 'AuthController@logOut')->name('logout');
 
-        Route::namespace('Admin')->prefix('admin')->group(function ()
-        {
-            Route::prefix('employee')->name('employee.')->group(function ()
-            {
-                Route::get('/list','EmployeeController@index')->name('list');
-                Route::get('/search','EmployeeController@search')->name('search');
-                Route::get('/add','EmployeeController@create')->name('create');
-                Route::get('/edit/{employee}','EmployeeController@edit')->name('edit');
-                Route::get('/delete/{employee}','EmployeeController@destroy')->name('destroy');
-                Route::post('/store','EmployeeController@store')->name('store');
+        Route::namespace('Admin')->prefix('admin')->group(function () {
+            Route::prefix('employee')->name('employee.')->group(function () {
+                Route::get('/list', 'EmployeeController@index')->name('list');
+                Route::get('/search', 'EmployeeController@search')->name('search');
+                Route::get('/add', 'EmployeeController@create')->name('create');
+                Route::get('/edit/{employee}', 'EmployeeController@edit')->name('edit');
+                Route::get('/delete/{employee}', 'EmployeeController@destroy')->name('destroy');
+                Route::post('/store', 'EmployeeController@store')->name('store');
                 Route::post('/image', 'EmployeeController@updateImage');
-                Route::post('/update/{employee}','EmployeeController@update')->name('update');
+                Route::post('/update/{employee}', 'EmployeeController@update')->name('update');
+            });
+
+            Route::prefix('account')->name('account.')->group(function () {
+                Route::get('/list', 'AccountController@index')->name('list');
+                Route::get('/add', 'AccountController@create')->name('create');
+                Route::get('/search', 'AccountController@search')->name('search');
+                Route::get('/edit/{account}', 'AccountController@edit')->name('edit');
+                Route::get('/delete/{account}', 'AccountController@destroy')->name('delete');
+                Route::post('/store', 'AccountController@store')->name('store');
+                Route::post('/update/{account}', 'AccountController@update')->name('update');
             });
         });
     });
-
-
 });
