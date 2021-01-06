@@ -13,6 +13,17 @@ class AttendanceManager
         $this->empManager = $empManager;
     }
 
+    public function getAllAttendance($employee_id = null)
+    {
+        if ($employee_id) {
+            $attendance = Attendance::where('employee_id', $employee_id);
+        } else {
+            $attendance = Attendance::all();
+        }
+
+        return $attendance;
+    }
+
     public function getActiveAttendance($employee_id)
     {
         return Attendance::where('employee_id', $employee_id)
@@ -101,10 +112,10 @@ class AttendanceManager
             }
             $attendance->time_out = $time_out;
             $attendance->save();
+            $response['status'] = 'success';
             $response['message'] = 'Successful Time out';
         } else {
             $response['message'] = 'No time in. Please time in first.';
-            $response['status'] = 'success';
         }
 
         return $response;

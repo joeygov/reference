@@ -3,7 +3,7 @@
       <li class="nav-item nav-profile">
         <a href="#" class="nav-link">
           <div class="profile-image">
-            <img class="img-mdm rounded-circle" src="assets/images/faces/face8.jpg" alt="profile image">
+            <img class="img-mdm rounded-circle" src="{{ asset('assets/images/faces/face8.jpg') }}" alt="profile image">
             <div class="dot-indicator bg-success"></div>
           </div>
           <div class="text-wrapper">
@@ -14,7 +14,7 @@
       </li>
       <li class="nav-item nav-category"></li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('home')}}">
           <i class="menu-icon typcn typcn-document-text"></i>
           <span class="menu-title">Today's Tracker</span>
         </a>
@@ -66,12 +66,6 @@
         <a class="nav-link" href="index.html">
           <i class="menu-icon typcn typcn-document-text"></i>
           <span class="menu-title">Schedules</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="menu-icon typcn typcn-document-text"></i>
-          <span class="menu-title">Logout</span>
         </a>
       </li>
     </ul>
