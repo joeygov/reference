@@ -9,8 +9,9 @@
 
 @section('maincontent')
 <div class="main-panel">
+    @include('flash-message')
     <div class="content-wrapper">
-        <div class="row">
+        <div class="row" id="employee_list">
             <div class="col-lg-12  grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -30,7 +31,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            <select name="account" id="account_id" class="form-control form-control-lg" aria-placeholder="Account">
+                                            <select name="account" id="account_id" class="form-control" aria-placeholder="Account">
                                                 <option value="" class="form-control form-control-lg">~</option>
                                                 @foreach ($accounts as $account)
                                                 <option value="{{ $account->id }}" class="form-control form-control-lg">{{ $account->name }}</option>
@@ -38,7 +39,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-4">
-                                            <select name="user_status" id="user_status" class="form-control form-control-lg" aria-placeholder="User Status">
+                                            <select name="user_status" id="user_status" class="form-control" aria-placeholder="User Status">
                                                 <option value="" class="form-control form-control-lg">`</option>
                                                 <option value="1" class="form-control form-control-lg">Active</option>
                                                 <option value="2" class="form-control form-control-lg">Block</option>
@@ -52,7 +53,7 @@
                                 </div>
                             </div>
                         </form>
-                        <button type="button" class="btn btn-primary btn-rounded btn-fw">Add Employee</button>
+                        <a href="{{ route('employee.create') }}" id="emp_add"  class="btn btn-primary btn-rounded btn-fw">Add Employee</a>
                         <table class="table table-striped table-bordered nowrap" id="employee-table">
                             <thead>
                               <tr>
@@ -81,8 +82,8 @@
                                     <td>{{ $employee->user_statuses }}</td>
                                     <td>{{ $employee->user_roles }}</td>
                                     <td>
-                                        <a href=""><i class="fa fa-pencil-square-o"></i></a>
-                                        <a href=""><i class="fa fa-trash-o"></i></a>
+                                        <a href="{{ route('employee.edit', $employee->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="{{ route('employee.destroy', $employee->id) }}"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

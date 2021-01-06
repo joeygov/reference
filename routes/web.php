@@ -44,19 +44,23 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::prefix('employee')->name('employee.')->group(function () {
                 Route::get('/list', 'EmployeeController@index')->name('list');
                 Route::get('/search', 'EmployeeController@search')->name('search');
+                Route::get('/add', 'EmployeeController@create')->name('create');
+                Route::get('/edit/{employee}', 'EmployeeController@edit')->name('edit');
+                Route::get('/delete/{employee}', 'EmployeeController@destroy')->name('destroy');
+                Route::post('/store', 'EmployeeController@store')->name('store');
+                Route::post('/image', 'EmployeeController@updateImage');
+                Route::post('/update/{employee}', 'EmployeeController@update')->name('update');
             });
 
-            Route::prefix('account')->name('account.')->group(function ()
-            {
-                Route::get('/list','AccountController@index')->name('list');
-                Route::get('/add','AccountController@create')->name('create');
-                Route::get('/search','AccountController@search')->name('search');
-                Route::get('/edit/{account}','AccountController@edit')->name('edit');
-                Route::get('/delete/{account}','AccountController@destroy')->name('delete');
-                Route::post('/store','AccountController@store')->name('store');
-                Route::post('/update/{account}','AccountController@update')->name('update');
+            Route::prefix('account')->name('account.')->group(function () {
+                Route::get('/list', 'AccountController@index')->name('list');
+                Route::get('/add', 'AccountController@create')->name('create');
+                Route::get('/search', 'AccountController@search')->name('search');
+                Route::get('/edit/{account}', 'AccountController@edit')->name('edit');
+                Route::get('/delete/{account}', 'AccountController@destroy')->name('delete');
+                Route::post('/store', 'AccountController@store')->name('store');
+                Route::post('/update/{account}', 'AccountController@update')->name('update');
             });
-
         });
     });
 });

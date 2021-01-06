@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User;
+use Hash;
+use App\Helpers\FileHelper;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends User
 {
+    use SoftDeletes;
+
     const ROLE = [
         1 => 'USER',
         2 => 'WFM',
@@ -95,6 +100,43 @@ class Employee extends User
     public function account()
     {
         return $this->belongsTo('\App\Models\Account');
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function setShiftStartsAttribute($time)
+    {
+        $this->attributes['shift_starts'] = $time ? date("h:i", strtotime( $time )) : null;
+    }
+
+    public function setShiftEndsAttribute($time)
+    {
+        $this->attributes['shift_ends'] = $time ? date("h:i", strtotime( $time )) : null;
+    }
+
+    /**
+     * Upload a temporary image
+     *
+     * @param file $photo
+     *
+     * @return string(url) / false
+     */
+    public static function uploadPathTmpFile($photo)
+    {
+        try {
+            $server_dir = config('const.upload_local_temp_path');
+            FileHelper::addDirectory($server_dir, 0777);
+            $file_name = FileHelper::makeUniqFileName($photo->getClientOriginalExtension(), $server_dir);
+            $filepath = $server_dir;
+            $img_path = FileHelper::storeResizeImg($photo->path(), $filepath, $file_name, null, 300);
+            return $img_path;
+        } catch (\Exeption $e) {
+            \Log::error(get_class().':uploadTmpImage(): '.$e->getMessage());
+            return false;
+        }
     }
 
 }
