@@ -1,3 +1,4 @@
+//Employee table
 $(document).ready(function() {
 
    var employee_table = $('#employee-table').DataTable({
@@ -34,7 +35,6 @@ $(document).ready(function() {
             account_id: account_id,
             user_status: user_status
         },function (data) {
-            console.log(data)
             employee_table.clear().draw();
 
             data.forEach(element => {
@@ -78,3 +78,49 @@ $(document).ready(function() {
         $(".search-employee").click();
     });
 } );
+
+//Account
+$(document).ready(function() {
+   var account_table = $('#account-table').DataTable({
+        "searching": false,
+        "responsive":true,
+        "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
+    });
+
+    $(document).on('click', '.search-account', function () {
+        let account_id = $('#account_id').val();
+        let account_name = $('#account_name').val();
+
+        $.get('/admin/account/search', {
+            account_id: account_id,
+            account_name: account_name
+        },function (data) {
+            account_table.clear().draw();
+
+            data.forEach(element => {
+                account_id = element.id;
+                account_name = element.name;
+
+                account_table.row.add([
+                    account_id
+                    ,account_name
+                    ,'<a href="/admin/account/edit/' + account_id +'"><i class="fa fa-pencil-square-o"></i></a>' + ' ' +
+                        '<a href="/admin/account/delete/'+ account_id +'"><i class="fa fa-trash-o"></i></a>'
+                ]).draw(true);
+
+                account_table
+                .search( '' )
+                .columns().search( '' )
+                .draw();
+            });
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+    $(document).on('click','.search-account-reset', function(){
+        $('#account_id').val('');
+        $('#account_name').val('');
+        $(".search-account").click();
+    });
+});

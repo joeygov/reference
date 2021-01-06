@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateAccountsTable extends Migration
 {
     /**
@@ -18,6 +19,8 @@ class CreateAccountsTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        \DB::statement("ALTER TABLE accounts AUTO_INCREMENT = 1001;");
     }
 
     /**
