@@ -66,7 +66,24 @@ class AttendanceManager
         $attendance = new Attendance();
         $attendance->employee_id = $employee_id;
         $attendance->time_in = $time_in;
+        $attendance->status = $this->getAttendanceStatus($employee_id, $time_in);
         $attendance->save();
+    }
+
+    private function getAttendanceStatus($employee_id, $time_in)
+    {
+        $status = Attendance::STATUS['FLEX'];
+        $employee = $this->empManager->getEmployee($employee_id);
+        if (!$employee->is_flex) {
+            if ($employee->shift_starts) {
+                $is_late = $employee->shift_starts < strtotime($time_in->format('H:i'));
+                $status = $is_late ? Attendance::STATUS['LATE'] : Attendance::STATUS['ON_TIME'];
+            } else {
+                $status = Attendance::STATUS['ON_TIME'];
+            }
+        }
+
+        return $status;
     }
 
     public function timeIn($employee_id, $time_in, $image = null)

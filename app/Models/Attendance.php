@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
+    const STATUS = [
+        'FLEX' => 1,
+        'LATE' => 2,
+        'ON_TIME' => 3,
+    ];
     protected $dates = [
         'time_in',
         'time_out',
