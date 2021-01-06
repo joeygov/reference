@@ -85,7 +85,7 @@ $(document).ready(function() {
 
 //Account
 $(document).ready(function() {
-   var account_table = $('#account-table').DataTable({
+    var account_table = $('#account-table').DataTable({
         "searching": false,
         "responsive":true,
         "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
@@ -127,4 +127,16 @@ $(document).ready(function() {
         $('#account_name').val('');
         $(".search-account").click();
     });
+
+    //Schedule
+    $(document).ready(function() {
+        var schedule_table = $('#schedule-table').DataTable({
+            "searching": false,
+            "responsive":true,
+            "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
+        });
+
+    });
 });
+
+
