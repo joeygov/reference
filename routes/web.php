@@ -62,5 +62,12 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::post('/update/{account}', 'AccountController@update')->name('update');
             });
         });
+
+        Route::namespace('ReportManager')->prefix('manager')->group(function () {
+            Route::prefix('attendance')->name('attendance.')->group(function () {
+                Route::get('/list', 'AttendanceController@index')->name('list');
+                Route::get('/search', 'AttendanceController@search')->name('search');
+            });
+        });
     });
 });
