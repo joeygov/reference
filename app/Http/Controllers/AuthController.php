@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('guest:user')->except('logOut');
+        $this->middleware('guest:user')->except('logOut');
     }
 
     public function index()
