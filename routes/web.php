@@ -21,9 +21,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/login', 'AuthController@index')->name('login');
     Route::post('/login', 'AuthController@store');
 
-    Route::get('/entry_page', 'EntryPageController@entryPage')->name('entryPage');
-    Route::post('/captureImage', 'EntryPageController@saveImage')->name('capture_Image');
+    Route::get('/entry_page', 'EntryPageController@entryPage')->name('entry_page');
+    Route::post('/captureImage', 'EntryPageController@saveImage')->name('capture_image');
     Route::get('/fingerprint', 'EntryPageController@fingerprint')->name('fingerprint');
+    Route::post('/entrytimeIn', 'EntryPageController@timeInOut')->name('entrytimeinout');
+    
 
     Route::middleware('auth:user')->group(function () {
         Route::get('/home', 'UserController@index')->name('home');

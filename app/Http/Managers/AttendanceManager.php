@@ -3,6 +3,7 @@
 namespace App\Http\Managers;
 
 use App\Models\Attendance;
+use App\Models\Employee;
 
 class AttendanceManager
 {
@@ -20,6 +21,7 @@ class AttendanceManager
             ->whereNull('time_out')
             ->first();
     }
+
 
     public function getAttendanceDate($employee_id, $date)
     {
@@ -55,24 +57,34 @@ class AttendanceManager
         $attendance = new Attendance();
         $attendance->employee_id = $employee_id;
         $attendance->time_in = $time_in;
+        $attendance->time_in_image =$image_link;
         $attendance->save();
+
+        return $attendance;
     }
 
-    public function timeIn($employee_id, $time_in, $image = null)
+    public function timeIn($employee_id, $time_in, $image =null)
     {
-        $image_link = '';
+        $image_link = null;
         $response = [
             'status' => 'error',
             'message' => 'Error',
         ];
+
+        $attendance = $this->getActiveAttendance($employee_id);
+
         if ($this->empManager->isUserLock($employee_id)) {
+
             $response['message'] = 'Employee account is locked. Please inform admin to unlock.';
+
         } elseif ($this->didNotTimeOut($employee_id)) {
+
             $response['message'] = 'No previous time out. Please time-out first.';
-        } else {
+        }else {
             if ($image) {
-                //call method to save image here;
-                $image_link = 'some link here';
+
+                $this->saveImage($image);
+                $image_link = $image;
             }
 
             $this->setEmployeeTimeIn($employee_id, $time_in, $image_link);
@@ -80,7 +92,6 @@ class AttendanceManager
             $response['status'] = 'success';
             $response['message'] = 'Successful Time In';
         }
-
         return $response;
     }
 
@@ -95,18 +106,39 @@ class AttendanceManager
         $attendance = $this->getActiveAttendance($employee_id);
         if ($attendance) {
             if ($image) {
-                //call method to save image here;
-                $image_link = '';
-                $attendance->time_in_image = $image_link;
+
+                $this->saveImage($image);
+                $image_link = $image;
+                $attendance->time_out_image = $image_link;
             }
             $attendance->time_out = $time_out;
             $attendance->save();
             $response['message'] = 'Successful Time out';
+
         } else {
+
             $response['message'] = 'No time in. Please time in first.';
             $response['status'] = 'success';
+
         }
 
         return $response;
     }
+    
+    public function saveImage()
+    {
+        $img = $_POST['image'];
+        $folderPath = storage_path('/app/ ');
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $current = date('mYdmHs');
+        $fileName = $current . '.png';
+        $file = $folderPath . $fileName;
+        file_put_contents($file, $image_base64);
+    
+        return $fileName;
+    }
+
 }

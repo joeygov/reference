@@ -12,12 +12,12 @@ class EmployeeManager
 
     public function getEmployeeByEmpId($emp_id)
     {
-        return Employee::where('emp_id', $emp_id)->first();
+        return Employee::where('emp_id', $emp_id)->first();      
     }
 
     public function getEmployee($employee_id)
     {
-        return Employee::find($employee_id)->first();
+        return Employee::find($empployee_id)->first();
     }
 
     public function getEmployeeByBio($bio)
@@ -27,7 +27,7 @@ class EmployeeManager
 
     public function isUserLock($employee_id)
     {
-        return  Employee::USER_STATUS['LOCK'] == Employee::where('id', $employee_id)->first()->user_status;
+        return  Employee::USER_STATUS['LOCK'] == Employee::where('emp_id', $employee_id)->first()->user_status;
     }
 
     public function searchEmployee($request = null)

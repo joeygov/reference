@@ -3,32 +3,66 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Managers\AttendanceManager;
+use App\Http\Managers\BreakManager;
+use App\Http\Managers\EmployeeManager;
+use Carbon\Carbon;
+
+use Illuminate\Support\Facades\Auth;
 
 class EntryPageController extends Controller
 {
+
+    protected $attendanceManager;
+    protected $breakManager;
+    protected $employeeManager;
+
+    public function __construct(AttendanceManager $attendanceManager, BreakManager $breakManager, EmployeeManager $employeeManager)
+    {
+        $this->attendanceManager = $attendanceManager;
+        $this->breakManager = $breakManager;
+        $this->employeeManager = $employeeManager;
+    }
+
     public function entryPage()
     {
         return view('entrypage');
     }
-    public function fingerprint(){
+
+    public function fingerprint()
+    {
         return view('fingerprint');
     }
     
-    public function saveImage()
+    public function timeInOut(Request $request)
+    {   
+        $response =[
+            'status' => 'error',
+            'message' => 'Error',
+        ];
+
+        if ($request->time == 'IN' ){
+        
+            $empinfo = $this->getInfo($request->employee_id);
+            $response = $this->attendanceManager->saveImage();
+            $response = $this->attendanceManager->timeIn($request->employee_id, Carbon::now(), $response);
+
+        }else{
+            
+            $empinfo = $this->getInfo($request->employee_id);
+            $response = $this->attendanceManager->saveImage();
+            $response = $this->attendanceManager->timeOut($request->employee_id, Carbon::now(), $response );
+        }
+
+        return view('entrypage', compact('empinfo'))->with('response', $response); 
+        
+    }
+
+    public function getInfo($employee_id)
     {
-        $img = $_POST['image'];
-        $folderPath = "C:\Users\develop\CebuTele-Net TimeTracker\cebutele_timetracker\public";
-        $image_parts = explode(";base64,", $img);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
-        $current = date('mYdmHs');
-        $fileName = $current . '.png';
-        $file = $folderPath . $fileName;
-        file_put_contents($file, $image_base64);
-    
-        return back()
-        ->with('success','You have successfully upload image.');
+        $empinfo = $this->employeeManager->getEmployeeByEmpId($employee_id);
+
+        return $empinfo;
     }
 
 }
