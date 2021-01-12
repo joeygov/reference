@@ -4,6 +4,7 @@ namespace App\Http\Managers;
 
 use App\Models\Attendance;
 use App\Models\Employee;
+use Carbon\Carbon;
 
 class AttendanceManager
 {
@@ -171,4 +172,73 @@ class AttendanceManager
         return $fileName;
     }
 
+
+    public function searchAttendance($request = null)
+    {
+        try {
+            $employee_id = empty($request->employee_id) ? '' : $request->employee_id;
+            $first_name = empty($request->first_name) ? '' : $request->first_name;
+            $last_name = empty($request->last_name) ? '' : $request->last_name;
+            $account_id = empty($request->account_id) ? '' : $request->account_id;
+            $status = empty($request->status) ? '' : $request->status;
+            $from = empty($request->from) ? '' : Carbon::parse($request->from)->format('Y-m-d');
+            $to = empty($request->to) ? '' : Carbon::parse($request->to)->format('Y-m-d');
+
+            $query = Attendance::with('employee');
+
+
+            if (empty($employee_id) && empty($first_name) && empty($last_name) && empty($account_id) && empty($status) && empty($from) && empty($to)) {
+                return $query->get()->toArray();
+            }
+
+            if (!empty($employee_id)) {
+                $query->whereHas('employee', function ($q) use ($employee_id)
+                {
+                    $q->where('emp_id', $employee_id);
+                });
+            }
+
+            if (!empty($first_name)) {
+                $query->where('first_name', 'like', '%' . $first_name . '%');
+            }
+
+            if (!empty($last_name)) {
+                $query->where('last_name', 'like', '%' . $last_name . '%');
+            }
+
+            if (!empty($account_id)) {
+                $query->whereHas('employee', function ($q) use ($account_id)
+                {
+                    $q->where('account_id', $account_id);
+                });
+            }
+
+            if (!empty($status)) {
+                $query->where('status', $status);
+            }
+
+            if (!empty($from)) {
+                if(empty($to)){
+                    $query->whereDate('time_in', $from);
+                }
+            }
+
+            if (!empty($to)) {
+                if(empty($from)){
+                    $query->whereDate('time_in', '<=', $to);
+                }
+            }
+
+            if (!empty($to) && !empty($from)) {
+                $query->whereBetween('time_in',[ $from, $to]);
+            }
+
+            return  $query->get()->toArray();
+
+        } catch (\Exception $e) {
+            \Log::error(get_class().':searchAttendance(): '.$e->getMessage());
+
+            return false;
+        }
+    }
 }

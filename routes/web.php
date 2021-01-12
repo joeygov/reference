@@ -51,5 +51,12 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/search','EmployeeController@search')->name('search');
             });
         });
+
+        Route::namespace('ReportManager')->prefix('manager')->group(function () {
+            Route::prefix('attendance')->name('attendance.')->group(function () {
+                Route::get('/list', 'AttendanceController@index')->name('list');
+                Route::get('/search', 'AttendanceController@search')->name('search');
+            });
+        });
     });
 });

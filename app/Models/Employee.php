@@ -102,6 +102,11 @@ class Employee extends User
         return $this->belongsTo('\App\Models\Account');
     }
 
+    public function attendance()
+    {
+        return $this->belongsTo('\App\Models\Attendance');
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);

@@ -225,5 +225,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'M_Employee' => App\Models\Employee::class,
+        'M_Attendance' => App\Models\Attendance::class,
     ],
 ];

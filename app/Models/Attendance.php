@@ -40,4 +40,23 @@ class Attendance extends Model
         'time_out_image',
         'updated_by',
     ];
+
+    protected $appends = [
+        'statuses'
+    ];
+
+    public function employee()
+    {
+        return $this->belongsTo('\App\Models\Employee');
+    }
+
+    public function getStatusesAttribute()
+    {
+        foreach(self::STATUS as $key => $status) {
+            if ($this->status == $status) {
+               return $key;
+            }
+        }
+
+    }
 }
