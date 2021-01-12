@@ -61,6 +61,20 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::post('/store', 'AccountController@store')->name('store');
                 Route::post('/update/{account}', 'AccountController@update')->name('update');
             });
+
+            Route::prefix('schedule')->name('schedule.')->group(function ()
+            {
+                Route::get('/list','ScheduleController@index')->name('list');
+                Route::get('/search','ScheduleController@search')->name('search');
+                Route::get('/add','ScheduleController@create')->name('create');
+            });
+
+            Route::prefix('schedule')->name('schedule.')->group(function ()
+            {
+                Route::get('/list','ScheduleController@index')->name('list');
+                Route::get('/search','ScheduleController@search')->name('search');
+                Route::get('/add','ScheduleController@create')->name('create');
+            });
         });
 
         Route::namespace('ReportManager')->prefix('manager')->group(function () {
