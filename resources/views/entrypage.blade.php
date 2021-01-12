@@ -24,7 +24,7 @@
                     @if(empty($empinfo))
                     <h1></h1>
                     @else
-                    <h1>{{$empinfo->last_name}}, {{$empinfo->first_name}}</h1>
+                    <h1>{{$empinfo->last_name}} {{$empinfo->first_name}}</h1>
                     @endif
                     </center>
                 <!-- Modal footer -->

@@ -69,7 +69,7 @@ class AttendanceManager
         $attendance->employee_id = $employee_id;
         $attendance->time_in = $time_in;
         $attendance->time_in_image =$image_link;
-        $attendance->status = $this->getAttendanceStatus($employee_id, $time_in);
+        $attendance->status = $this->getAttendanceStatus($employee_id, $time_in, $image_link);
         $attendance->save();
 
         return $attendance;
@@ -79,7 +79,7 @@ class AttendanceManager
     private function getAttendanceStatus($employee_id, $time_in)
     {
         $status = Attendance::STATUS['FLEX'];
-        $employee = $this->empManager->getEmployee($employee_id);
+        $employee = $this->empManager->getEmployeeByEmpId($employee_id);
         if (!$employee->is_flex) {
             if ($employee->shift_starts) {
                 $is_late = $employee->shift_starts < strtotime($time_in->format('H:i'));

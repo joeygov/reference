@@ -26,6 +26,7 @@ class EntryPageController extends Controller
 
     public function entryPage()
     {
+
         return view('entrypage');
     }
 
@@ -36,33 +37,40 @@ class EntryPageController extends Controller
     
     public function timeInOut(Request $request)
     {   
+
         $response =[
             'status' => 'error',
             'message' => 'Error',
         ];
 
-        if ($request->time == 'IN' ){
-        
-            $empinfo = $this->getInfo($request->employee_id);
-            $response = $this->attendanceManager->saveImage();
-            $response = $this->attendanceManager->timeIn($request->employee_id, Carbon::now(), $response);
+        if($request->employee_id == null || $request->employee_id == ' ')
+        {
+            $response['message'] = "Please input ID Number.";
+            return view('entrypage')->with('response', $response);
 
         }else{
-            
-            $empinfo = $this->getInfo($request->employee_id);
-            $response = $this->attendanceManager->saveImage();
-            $response = $this->attendanceManager->timeOut($request->employee_id, Carbon::now(), $response );
-        }
 
-        return view('entrypage', compact('empinfo'))->with('response', $response); 
+            if ($request->time == 'IN' )
+            {
+                $empinfo = $this->employeeManager->getEmployeeByEmpId($request->employee_id);
+                if(empty($empinfo)){
+                    $response['message'] = "Invalid ID Number.";
+                    return view('entrypage')->with('response', $response);
+                }
+                $response = $this->attendanceManager->saveImage();
+                $response = $this->attendanceManager->timeIn($request->employee_id, Carbon::now(), $response);
+    
+            }else{
+                $empinfo = $this->employeeManager->getEmployeeByEmpId($request->employee_id);
+                if(empty($empinfo)){
+                    $response['message'] = "Invalid ID Number.";
+                    return view('entrypage')->with('response', $response);
+                }
+                $response = $this->attendanceManager->saveImage();
+                $response = $this->attendanceManager->timeOut($request->employee_id, Carbon::now(), $response );
+            }
+            return view('entrypage', compact('empinfo'))->with('response', $response); 
+        }
         
     }
-
-    public function getInfo($employee_id)
-    {
-        $empinfo = $this->employeeManager->getEmployeeByEmpId($employee_id);
-
-        return $empinfo;
-    }
-
 }

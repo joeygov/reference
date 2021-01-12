@@ -20,7 +20,7 @@ class EmployeeManager
 
     public function getEmployee($employee_id)
     {
-        return Employee::find($empployee_id)->first();
+        return Employee::find($employee_id)->first();
     }
 
     public function getEmployeeByBio($bio)
