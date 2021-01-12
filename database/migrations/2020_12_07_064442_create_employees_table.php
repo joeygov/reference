@@ -19,7 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->smallInteger('user_role')->default(1);
             $table->string('email')->nullable();
             $table->string('password');
-            $table->string('remember_token')->nulllable();
+            $table->string('remember_token')->nullable();
             $table->smallInteger('user_status')->default(1);
             $table->boolean('is_wfh')->default(false);
             $table->string('first_name', 100);
@@ -35,6 +35,8 @@ class CreateEmployeesTable extends Migration
             $table->time('shift_starts', 0)->nullable();
             $table->time('shift_ends', 0)->nullable();
             $table->string('hdmf_num', 12)->nullable();
+            $table->string('sss_num', 12)->nullable();
+            $table->string('philhealth_num', 12)->nullable();
             $table->string('emp_image')->nullable();
             $table->binary('fingerprint')->nullable();
             $table->softDeletes('deleted_at', 0);

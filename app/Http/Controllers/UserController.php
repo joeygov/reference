@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Managers\AttendanceManager;
 use App\Http\Managers\BreakManager;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -18,12 +19,13 @@ class UserController extends Controller
         $this->breakManager = $breakManager;
     }
 
-    public function index($response = null)
+    public function index(Request $request)
     {
         $user = Auth::user();
         $attendance = $this->attendanceManager->getLatestAttendance($user->id);
         $active_break_btns = $this->breakManager->getActiveBreakBtns($attendance);
         $show_time_in_btn = $user->is_wfh && empty($attendance->time_in);
+        $response = $request->all();
 
         return view('user.today', compact(
             'user',
@@ -46,28 +48,23 @@ class UserController extends Controller
             $response = $this->attendanceManager->timeIn($user->id, Carbon::now());
         }
 
-        return redirect()->route('home')
-            ->with('response', $response);
+        return redirect()->route('home', $response);
     }
 
     public function timeOut()
     {
-        $response = [
-            'status' => 'error',
-            'message' => 'Error',
-        ];
+        $response = config('const.response');
         $user = Auth::user();
         if ($user->is_wfh) {
             $response = $this->attendanceManager->timeOut($user->id, Carbon::now());
         }
 
-        return redirect()->route('home')
-            ->with('response', $response);
+        return redirect()->route('home', $response);
     }
 
     public function setB1Start()
     {
-        $response = [];
+        $response = config('const.response');
         $attendance = $this->attendanceManager->getActiveAttendance(Auth::user()->id);
         $this->breakManager->setB1Start($attendance);
 

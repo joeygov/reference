@@ -3,15 +3,13 @@
 @push('css')
 <link rel="stylesheet" href="{{ asset('assets/vendors/datatables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendors/datatables/css/jquery.dataTables.min.css') }}">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
 <link rel="stylesheet" href="{{ asset('assets/admin/admin.css') }}">
 @endpush
 
 @section('maincontent')
 <div class="main-panel">
-    @include('flash-message')
     <div class="content-wrapper">
-        <div class="row" id="employee_list">
+        <div class="row">
             <div class="col-lg-12  grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -31,15 +29,12 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            <select name="account" id="account_id" class="form-control" aria-placeholder="Account">
+                                            <select name="account" id="account_id" class="form-control form-control-lg" aria-placeholder="Account">
                                                 <option value="" class="form-control form-control-lg">~</option>
-                                                @foreach ($accounts as $account)
-                                                <option value="{{ $account->id }}" class="form-control form-control-lg">{{ $account->name }}</option>
-                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-sm-4">
-                                            <select name="user_status" id="user_status" class="form-control" aria-placeholder="User Status">
+                                            <select name="user_status" id="user_status" class="form-control form-control-lg" aria-placeholder="User Status">
                                                 <option value="" class="form-control form-control-lg">`</option>
                                                 <option value="1" class="form-control form-control-lg">Active</option>
                                                 <option value="2" class="form-control form-control-lg">Block</option>
@@ -53,37 +48,34 @@
                                 </div>
                             </div>
                         </form>
-                        <a href="{{ route('employee.create') }}" id="emp_add"  class="btn btn-primary btn-rounded btn-fw">Add Employee</a>
-                        <table class="table table-striped table-bordered nowrap" id="employee-table">
+                        <a href="{{ route('schedule.create') }}" class="btn btn-primary btn-rounded btn-fw new_schedule">Create New Schedule</a>
+                        <table class="table table-striped table-bordered nowrap" id="schedule-table">
                             <thead>
                               <tr>
-                                <th> Employee ID </th>
-                                <th> First Name </th>
-                                <th> Last Name </th>
-                                <th> Employee Type </th>
+                                <th> Schedule ID </th>
                                 <th> Account </th>
-                                <th> User Status </th>
-                                <th> User Role </th>
+                                <th> Employees Count </th>
+                                <th> All Account Employees </th>
+                                <th> Shift Starts </th>
+                                <th> Shift Ends </th>
+                                <th> Type </th>
+                                <th> Date Starts </th>
                                 <th> Actions </th>
                               </tr>
                             </thead>
                             <tbody>
-                                @foreach ($employees as $employee)
+                                @foreach ($schedules as $schedule)
                                 <tr>
-                                    <td>{{$employee->emp_id}}</td>
-                                    <td>{{ $employee->first_name }}</td>
-                                    <td>{{ $employee->last_name }}</td>
-                                    <td>{{ $employee->emp_statuses }}</td>
-                                    @if( empty($employee->account))
-                                    <td></td>
-                                    @else
-                                    <td>{{ $employee->account->name }}</td>
-                                    @endif
-                                    <td>{{ $employee->user_statuses }}</td>
-                                    <td>{{ $employee->user_roles }}</td>
+                                    <td>{{ $schedule->id }}</td>
+                                    <td>{{ $schedule->account_id }}</td>
+                                    <td>{{ $schedule->is_all }}</td>
+                                    <td>{{ $schedule->is_flex }}</td>
+                                    <td>{{ $schedule->shift_starts }}</td>
+                                    <td>{{ $schedule->shift_ends }}</td>
+                                    <td>{{ $schedule->start_date }}</td>
                                     <td>
-                                        <a href="{{ route('employee.edit', $employee->id) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a href="{{ route('employee.destroy', $employee->id) }}"><i class="fa fa-trash-o"></i></a>
+                                        <a href=""><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href=""><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -99,13 +91,6 @@
 @push('js')
 <script src="{{ asset('assets/vendors/datatables.min.js') }}"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
 <script src="{{ asset('assets/admin/admin.js') }}"></script>
 @endpush
 

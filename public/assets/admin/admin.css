@@ -31,3 +31,168 @@ div.dt-buttons {
     background: linear-gradient(to top, #5768f3, #1c45ef) !important;
     color: white !important;
 }
+
+#employee_row{
+    width: 100%;
+}
+
+#upload{
+    opacity: 0;
+}
+
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: white !important;
+}
+
+.image-area {
+    border: 2px dashed rgb(33 150 243);
+    padding: 1rem;
+    position: relative;
+}
+
+.image-area::before {
+    content: 'Uploaded image result';
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.image-area img {
+    z-index: 2;
+    position: relative;
+    height: 322px;
+}
+
+#employee{
+    width: calc(120% - 270px) !important;
+}
+
+#button{
+    margin-left: 250px;
+    margin-top: 104px;
+}
+
+#butt{
+    margin-left: 45%;
+    position: absolute;
+    margin-top: 40%;
+}
+
+.required:after {
+    content:" *";
+    color: red;
+  }
+
+.upload-button{
+    background-color: rgb(33 150 243) !important;
+    margin-top: 2px;
+}
+
+.upload-container{
+    background-color: rgb(33 150 243) !important;
+}
+
+.error{
+    font-size: 12px;
+}
+
+.ui-timepicker-wrapper{
+    width: 247px !important;
+}
+
+#emp_add{
+    padding: 14px;
+}
+
+#employee_list{
+    width: 100%;
+}
+
+.cancel_butt{
+    margin-left: 100px;
+}
+
+.left_image{
+    width: 45%;
+    float: left;
+}
+
+.right_form{
+    width: 55%;
+    float: right;
+}
+
+#update_butt{
+    margin-left: 1%;
+    position: absolute;
+    margin-top: 6%;
+}
+
+.cancel_btn{
+    padding: 15px;
+}
+.account_list{
+    width: 100%;
+}
+
+#acct_add{
+    padding: 15px;
+}
+
+.new_schedule{
+    padding:15px;
+}
+
+#account_row{
+    margin-right: -82.5px;
+    margin-left: 175.5px;
+    width: 70%;
+}
+
+.card .card-header {
+    background: linear-gradient(to top, #5768f3, #1c45ef) !important;
+    padding: 10px;
+}
+
+.card .card-header p {
+    display: table;
+    margin: 0 auto;
+    font-size: 21px;
+    color: white;
+}
+
+.acc_name{
+    margin-left: 251px;
+}
+
+.btn_acct{
+    margin-left: 315px;
+    margin-top: 30px;
+    height: 30px;
+}
+
+.acct_cancel{
+    padding: 15px;
+}
+.schedule{
+    margin-left: 190px;
+}
+
+#all_employee{
+    height: 34px;
+}
+
+.ui-timepicker-wrapper .shift_starts{
+    width: 309px !important;
+}
+

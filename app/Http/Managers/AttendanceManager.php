@@ -14,6 +14,17 @@ class AttendanceManager
         $this->empManager = $empManager;
     }
 
+    public function getAllAttendance($employee_id = null)
+    {
+        if ($employee_id) {
+            $attendance = Attendance::where('employee_id', $employee_id);
+        } else {
+            $attendance = Attendance::all();
+        }
+
+        return $attendance;
+    }
+
     public function getActiveAttendance($employee_id)
     {
         return Attendance::where('employee_id', $employee_id)
@@ -58,12 +69,30 @@ class AttendanceManager
         $attendance->employee_id = $employee_id;
         $attendance->time_in = $time_in;
         $attendance->time_in_image =$image_link;
+        $attendance->status = $this->getAttendanceStatus($employee_id, $time_in);
         $attendance->save();
 
         return $attendance;
     }
 
-    public function timeIn($employee_id, $time_in, $image =null)
+    
+    private function getAttendanceStatus($employee_id, $time_in)
+    {
+        $status = Attendance::STATUS['FLEX'];
+        $employee = $this->empManager->getEmployee($employee_id);
+        if (!$employee->is_flex) {
+            if ($employee->shift_starts) {
+                $is_late = $employee->shift_starts < strtotime($time_in->format('H:i'));
+                $status = $is_late ? Attendance::STATUS['LATE'] : Attendance::STATUS['ON_TIME'];
+            } else {
+                $status = Attendance::STATUS['ON_TIME'];
+            }
+        }
+
+        return $status;
+    }
+
+    public function timeIn($employee_id, $time_in, $image = null)
     {
         $image_link = null;
         $response = [
@@ -95,7 +124,7 @@ class AttendanceManager
         return $response;
     }
 
-    public function timeOut($employee_id, $time_out, $image)
+    public function timeOut($employee_id, $time_out, $image = null)
     {
         $response = [
             'status' => 'error',
@@ -113,6 +142,7 @@ class AttendanceManager
             }
             $attendance->time_out = $time_out;
             $attendance->save();
+            $response['status'] = 'success';
             $response['message'] = 'Successful Time out';
 
         } else {

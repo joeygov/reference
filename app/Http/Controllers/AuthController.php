@@ -20,7 +20,7 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        $remember = $request->get('remember') == 1 ? true : false;
+        $remember = $request->get('remember') == 'on' ? true : false;
         if (Auth::guard('user')->attempt(['emp_id' => $request->emp_id, 'password' => $request->password], $remember)) {
             $user = Auth::user();
             session(['name' => $user->first_name.' '.$user->last_name]);
