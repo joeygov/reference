@@ -149,10 +149,14 @@ div.dt-buttons {
     padding: 15px;
 }
 
+.new_schedule{
+    padding:15px;
+}
+
 #account_row{
     margin-right: -82.5px;
     margin-left: 175.5px;
-    width: 100%;
+    width: 70%;
 }
 
 .card .card-header {
@@ -172,7 +176,7 @@ div.dt-buttons {
 }
 
 .btn_acct{
-    margin-left: 350px;
+    margin-left: 315px;
     margin-top: 30px;
     height: 30px;
 }
@@ -180,3 +184,15 @@ div.dt-buttons {
 .acct_cancel{
     padding: 15px;
 }
+.schedule{
+    margin-left: 190px;
+}
+
+#all_employee{
+    height: 34px;
+}
+
+.ui-timepicker-wrapper .shift_starts{
+    width: 309px !important;
+}
+
