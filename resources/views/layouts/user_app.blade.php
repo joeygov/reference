@@ -22,5 +22,6 @@
     </div>
     @push('scripts')
     <script src="{{ asset('assets/js/demo_1/dashboard.js') }}"></script>
+    <script src="{{ asset('assets/js/common.js') }}"></script>
     @endpush
 @endsection
