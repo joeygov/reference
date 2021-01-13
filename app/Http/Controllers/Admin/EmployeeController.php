@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Managers\EmployeeManager;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\CsvExport;
 use App\Http\Requests\EmployeeRequest;
-use App\Models\Employee;
 use App\Models\Account;
+use App\Models\Employee;
 use finfo;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
 class EmployeeController extends Controller
@@ -32,8 +30,9 @@ class EmployeeController extends Controller
     public function create()
     {
         $accounts = Account::all();
+        $employee = new Employee();
 
-        return view('admin.employee.create', compact('accounts'));
+        return view('admin.employee.create', compact('accounts', 'employee'));
     }
 
     public function store(EmployeeRequest $request, EmployeeManager $employeeManager)
@@ -60,7 +59,6 @@ class EmployeeController extends Controller
         }
 
         $retVal = $employeeManager->insertEmployee($request);
-
 
         if ($retVal) {
             return redirect()->route('employee.list')->with('success', 'Successfully Created Employee!');
@@ -118,5 +116,4 @@ class EmployeeController extends Controller
 
         return redirect()->back()->with('success', 'Deleted Successfully');
     }
-
 }

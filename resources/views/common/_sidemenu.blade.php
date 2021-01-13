@@ -33,12 +33,6 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="menu-icon typcn typcn-document-text"></i>
-          <span class="menu-title">My Information</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="{{ route('attendance.list') }}">
           <i class="menu-icon typcn typcn-document-text"></i>
           <span class="menu-title">Attendances</span>
