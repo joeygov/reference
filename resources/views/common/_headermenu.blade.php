@@ -19,7 +19,7 @@
               <p class="mb-1 mt-3 font-weight-semibold">{{session('name')}}</p>
               <p class="font-weight-light text-muted mb-0">{{session('email')}}</p>
             </div>
-            <a class="dropdown-item">My Profile <i class="dropdown-item-icon ti-dashboard"></i></a>
+            <a class="dropdown-item" href="{{route('user.profile')}}">My Profile <i class="dropdown-item-icon ti-dashboard"></i></a>
             <a href="javascript:void(0)"  onclick="$('#logout-form').submit();" class="dropdown-item">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST">
               @csrf

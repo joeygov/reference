@@ -40,6 +40,13 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::post('/logout', 'AuthController@logOut')->name('logout');
 
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::get('/profile', 'UserController@profile')->name('profile');
+            Route::get('/tracker', 'TrackerController@index')->name('tracker');
+            Route::get('/tracker/search', 'TrackerController@search')->name('tracker.search');
+            Route::get('/calendartracker', 'TrackerController@calendar')->name('calendartracker');
+        });
+
         Route::namespace('Admin')->prefix('admin')->group(function () {
             Route::prefix('employee')->name('employee.')->group(function () {
                 Route::get('/list', 'EmployeeController@index')->name('list');
@@ -62,16 +69,15 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::post('/update/{account}', 'AccountController@update')->name('update');
             });
 
-            Route::prefix('schedule')->name('schedule.')->group(function ()
-            {
-                Route::get('/list','ScheduleController@index')->name('list');
-                Route::get('/search','ScheduleController@search')->name('search');
-                Route::get('/add','ScheduleController@create')->name('create');
-                Route::get('/getEmployee','ScheduleController@getEmployee')->name('getEmployee');
+            Route::prefix('schedule')->name('schedule.')->group(function () {
+                Route::get('/list', 'ScheduleController@index')->name('list');
+                Route::get('/search', 'ScheduleController@search')->name('search');
+                Route::get('/add', 'ScheduleController@create')->name('create');
+                Route::get('/getEmployee', 'ScheduleController@getEmployee')->name('getEmployee');
                 Route::get('/edit/{schedule}', 'ScheduleController@edit')->name('edit');
                 Route::get('/delete/{schedule}', 'ScheduleController@destroy')->name('delete');
-                Route::post('/store','ScheduleController@store')->name('store');
-                Route::post('/update/{schedule}','ScheduleController@update')->name('update');
+                Route::post('/store', 'ScheduleController@store')->name('store');
+                Route::post('/update/{schedule}', 'ScheduleController@update')->name('update');
             });
 
             Route::prefix('attendance')->name('attendance.')->group(function () {
