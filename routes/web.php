@@ -40,7 +40,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::post('/logout', 'AuthController@logOut')->name('logout');
 
-        Route::namespace('User')->prefix('user')->name('user.')->group(function () {
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::get('/profile', 'UserController@profile')->name('profile');
             Route::get('/tracker', 'TrackerController@index')->name('tracker');
             Route::get('/tracker/search', 'TrackerController@search')->name('tracker.search');
             Route::get('/calendartracker', 'TrackerController@calendar')->name('calendartracker');
