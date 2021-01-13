@@ -44,22 +44,5 @@
 @push('js')
 <script src="{{ asset('assets/vendors/timepicker/jquery.timepicker.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#imageResult').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $(document).ready(function(){
-        $('#shift_start').timepicker({});
-        $('#shift_end').timepicker({});
-    });
-
-</script>
+<script src="{{ asset('assets/js/upload.js') }}"></script>
 @endpush

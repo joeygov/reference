@@ -23,4 +23,5 @@ Today's Tracker
 </div>
 @endsection
 @push('js')
+<script src="{{ asset('assets/js/upload.js') }}"></script>
 @endpush
