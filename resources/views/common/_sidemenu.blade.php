@@ -20,7 +20,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('user.tracker')}}">
           <i class="menu-icon typcn typcn-coffee"></i>
           <span class="menu-title">My Tracker</span>
           <i class="menu-arrow"></i>
