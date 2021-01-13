@@ -23,8 +23,20 @@ class ScheduleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'start_date' => 'nullable|date',
-        ];
+        $req = \Request::route();
+
+        if ($req->action['as'] == 'schedule.store' || $req->action['as'] == 'schedule.update') {
+            $validate =  [
+                'start_date' => 'required|date',
+                'account_id' => 'required',
+                'is_flex' => 'required',
+            ];
+        }else {
+            $validate =  [
+                'start_date' => 'nullable|date',
+            ];
+        }
+
+        return $validate;
     }
 }

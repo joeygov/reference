@@ -20,16 +20,18 @@
             <div class="col-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-sample" method="POST" action="{{ route('schedule.store') }}">
+                        <form class="form-sample" method="POST" action="{{ route('schedule.update', $schedule->id) }}">
                             @csrf
                             <div class="form-group row schedule">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label required ">Account : </label>
+                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Account : </label>
                                 <div class="col-sm-5">
                                     <select name="account_id" id="account"
                                         class="form-control form-control-md @error('account_id') is-invalid @enderror">
                                         <option value="">Account</option>
                                         @foreach ($accounts as $account)
-                                        <option value="{{ $account->id }}">{{$account->name}}</option>
+                                        <option value="{{ $account->id }}"
+                                            {{ old('account_id', $schedule->account_id) == $account->id ? 'selected' : '' }}>
+                                            {{$account->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('account_id')
@@ -41,7 +43,8 @@
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">All Employees in Action
                                     : </label>
                                 <div class="col-sm-5">
-                                    <input type="checkbox" name="is_all" value="1" id="all_employee"
+                                    <input type="checkbox" name="is_all" value="1"
+                                        {{ old('is_all', $schedule->is_all) == 1 ? 'checked' : '' }} id="all_employee"
                                         placeholder="Account Name">
                                 </div>
                             </div>
@@ -51,6 +54,11 @@
                                 <div class="col-sm-5">
                                     <select name="employee[]" id="employee" data-placeholder="Employee Name" multiple
                                         class="chosen-select form-control form-control-md @error('') is-invalid @enderror">
+                                        @foreach ($schedule->schedule_employee as $sched)
+                                        <option value="{{ $sched->employee->id }}" selected>
+                                            {{ $sched->employee->emp_id }} / {{ $sched->employee->first_name }}
+                                            {{ $sched->employee->last_name }}</option>
+                                        @endforeach
                                     </select>
                                     @error('employee')
                                     <span class="error" style="color:red">{{ $message }}</span>
@@ -58,13 +66,16 @@
                                 </div>
                             </div>
                             <div class="form-group row schedule">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label required">Type : </label>
+                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Type : </label>
                                 <div class="col-sm-5">
                                     <select name="is_flex"
                                         class="form-control form-control-md @error('is_flex') is-invalid @enderror">
                                         <option value="">Type</option>
-                                        <option value="1">Flex</option>
-                                        <option value="0">Fix</option>
+                                        <option value="1"
+                                            {{ old('is_flex', $schedule->is_flex) == 1 ? 'selected' : '' }}>Flex
+                                        </option>
+                                        <option value="0"
+                                            {{ old('is_flex', $schedule->is_flex) == 0 ? 'selected' : '' }}>Fix</option>
                                     </select>
                                     @error('is_flex')
                                     <span class="error" style="color:red">{{ $message }}</span>
@@ -75,7 +86,7 @@
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Shift Starts : </label>
                                 <div class="col-sm-5">
                                     <input type="text" name="shift_starts" id="shift_starts"
-                                        value="{{ old('shift_starts') }}"
+                                        value="{{ old('shift_starts', $schedule->shift_starts) }}"
                                         class="shift_starts form-control form-control-lg @error('shift_starts') is-invalid @enderror"
                                         id="exampleInputEmail2" placeholder="Shift Starts">
                                     @error('shift_starts')
@@ -86,7 +97,8 @@
                             <div class="form-group row schedule">
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Shift Ends : </label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="shift_ends" id="shift_ends" value="{{ old('shift_ends') }}"
+                                    <input type="text" name="shift_ends" id="shift_ends"
+                                        value="{{ old('shift_ends', $schedule->shift_ends) }}"
                                         class="shift_ends form-control form-control-lg @error('shift_ends') is-invalid @enderror"
                                         id="exampleInputEmail2" placeholder="Shift Starts">
                                     @error('shift_ends')
@@ -95,13 +107,13 @@
                                 </div>
                             </div>
                             <div class="form-group row schedule">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label required">Date Starts : </label>
+                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Date Starts : </label>
                                 <div class="col-sm-5">
                                     <input type="text" name="start_date" id="start_date" autocomplete="off"
-                                        value="{{ old('start_date') }}"
+                                        value="{{ old('start_date', \Carbon\Carbon::parse($schedule->start_date)->format('m/d/Y')) }}"
                                         class="form-control form-control-lg @error('start_date') is-invalid @enderror"
                                         id="exampleInputEmail2" placeholder="Start Date">
-                                    @error('start_date')
+                                    @error('start-date')
                                     <span class="error" style="color:red">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -110,7 +122,11 @@
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Employee Name : </label>
                                 <div class="col-sm-5">
                                     <textarea name="" id="employee_name" cols="30" rows="10"
-                                        class="form-control form-control-lg @error('account_name') is-invalid @enderror"></textarea>
+                                        class="form-control form-control-lg @error('account_name') is-invalid @enderror">
+                                        @foreach ($schedule->schedule_employee as $sched)
+                                        {{ $sched->employee->emp_id }} / {{ $sched->employee->first_name }} {{ $sched->employee->last_name }}
+                                        @endforeach
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="form-group row btn_acct">

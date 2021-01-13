@@ -56,7 +56,8 @@ class Employee extends User
     protected $appends = [
         'user_roles',
         'emp_statuses',
-        'user_statuses'
+        'user_statuses',
+
     ];
 
     const STATUS = [
