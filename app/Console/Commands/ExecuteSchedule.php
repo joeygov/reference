@@ -39,6 +39,8 @@ class ExecuteSchedule extends Command
      */
     public function handle()
     {
+        $this->comment('Checking database...');
+
         \Log::info(get_class().'->handle(): Executing');
 
         $count = 0;
