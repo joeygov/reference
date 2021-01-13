@@ -73,16 +73,13 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/list', 'ScheduleController@index')->name('list');
                 Route::get('/search', 'ScheduleController@search')->name('search');
                 Route::get('/add', 'ScheduleController@create')->name('create');
+                Route::get('/getEmployee', 'ScheduleController@getEmployee')->name('getEmployee');
+                Route::get('/edit/{schedule}', 'ScheduleController@edit')->name('edit');
+                Route::get('/delete/{schedule}', 'ScheduleController@destroy')->name('delete');
+                Route::post('/store', 'ScheduleController@store')->name('store');
+                Route::post('/update/{schedule}', 'ScheduleController@update')->name('update');
             });
 
-            Route::prefix('schedule')->name('schedule.')->group(function () {
-                Route::get('/list', 'ScheduleController@index')->name('list');
-                Route::get('/search', 'ScheduleController@search')->name('search');
-                Route::get('/add', 'ScheduleController@create')->name('create');
-            });
-        });
-
-        Route::namespace('ReportManager')->prefix('manager')->group(function () {
             Route::prefix('attendance')->name('attendance.')->group(function () {
                 Route::get('/list', 'AttendanceController@index')->name('list');
                 Route::get('/search', 'AttendanceController@search')->name('search');

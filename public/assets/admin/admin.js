@@ -53,8 +53,8 @@ $(document).ready(function() {
                     ,account
                     ,user_status
                     ,user_role
-                    ,'<a href=""><i class="fa fa-pencil-square-o"></i></a>' + ' ' +
-                        '<a href=""><i class="fa fa-trash-o"></i></a>'
+                    ,'<a href="/admin/employee/edit/' + employee_id +'"><i class="fa fa-pencil-square-o"></i></a>' + ' ' +
+                     '<a href="/admin/employee/delete/'+ employee_id +'"><i class="fa fa-trash-o"></i></a>'
                 ]).draw(true);
 
                 employee_table
@@ -195,7 +195,7 @@ $(document).ready(function() {
          let status = $('#status').val();
          let from = $('#from').val();
          let to = $('#to').val();
-         $.get('/manager/attendance/search', {
+         $.get('/admin/attendance/search', {
              employee_id: employee_id,
              first_name: first_name,
              last_name: last_name,
@@ -286,6 +286,84 @@ $(document).ready(function() {
         "responsive":true,
         "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
     });
+
+    $(document).ready(function(){
+        $('#shift_starts').timepicker({});
+        $('#shift_ends').timepicker({});
+        $('#start_date').datepicker();
+    });
+
+    function convertTime(time) {
+
+        time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        if (time.length > 1) {
+            time = time.slice (1);
+            time[5] = +time[0] < 12 ? 'am' : 'pm';
+            time[0] = +time[0] % 12 || 12;
+            time[0] = (time[0] < 10) ? ("0" + time[0]) : time[0]
+            time.splice(3, 2);
+        }
+        return time.join ('  ');
+    }
+
+
+    $(document).on('click', '.search-schedule', function () {
+         let schedule_id = $('#schedule_id').val();
+         let start_date = $('#start_date').val();
+         let shift_starts = $('#shift_starts').val();
+         let shift_ends = $('#shift_ends').val();
+         let account_id = $('#account_id').val();
+         let type = $('#type').val();
+         $.get('/admin/schedule/search', {
+            schedule_id: schedule_id,
+            start_date: start_date,
+            shift_starts: shift_starts,
+            shift_ends: shift_ends,
+            account_id: account_id,
+            type: type,
+         }, function (data) {
+            schedule_table.clear().draw();
+             data.forEach(element => {
+                 schedule_id = element.id;
+                 account_id =  element.account_id;
+                 employee_count = element.schedule_employee.length;
+                 is_all = ((element.is_all == 1) ? 'Yes' : 'No') ;
+                 shift_starts = convertTime(element.shift_starts);
+                 shift_ends = convertTime(element.shift_ends);
+                 type = element.is_flexs;
+                 start_date = element.start_date;
+                 schedule_table.row.add([
+                    schedule_id
+                     ,account_id
+                     ,employee_count
+                     ,is_all
+                     ,shift_starts
+                     ,shift_ends
+                     ,type
+                     ,start_date
+                     ,'<a href="/admin/schedule/edit/' + schedule_id +'"><i class="fa fa-pencil-square-o"></i></a>' + ' ' +
+                     '<a href="/admin/schedule/delete/'+ schedule_id +'"><i class="fa fa-trash-o"></i></a>'
+                 ]).draw(true);
+
+                 schedule_table
+                 .search( '' )
+                 .columns().search( '' )
+                 .draw();
+             });
+         }).fail(function (err) {
+             console.log(err)
+         });
+     });
+
+     $(document).on('click','.search-schedule-reset', function(){
+       $('#schedule_id').val('');
+        $('#start_date').val("").datepicker("update");;
+       $('#shift_starts').val('');
+        $('#shift_ends').val('');
+        $('#account_id').val('');
+       $('#type').val('');
+        $('.search-schedule').click();
+     });
 });
 
 

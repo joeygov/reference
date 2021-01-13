@@ -10,4 +10,9 @@ class ScheduleEmployee extends Model
         'schedule_id',
         'employee_id',
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo('\App\Models\Employee');
+    }
 }

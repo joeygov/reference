@@ -154,7 +154,8 @@ return [
         'sss_num' => 'SSS Number',
         'philhealth_num' => 'PhilHealth Number',
         'contact_num' => 'Contact Number',
-        'is_flex' => 'Fix/Flex Schedule'
+        'is_flex' => 'Fix/Flex Schedule',
+        'account_id' => 'Account'
     ],
 
 ];
