@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use App\Models\Schedule;
+use App\Models\Employee;
 
 class ExecuteSchedule extends Command
 {
@@ -47,9 +48,17 @@ class ExecuteSchedule extends Command
 
         Schedule::whereDate('start_date', Carbon::now())->each(function ($schedule) use (&$count)
         {
-            $schedule->schedule_employee()->each(function ($query)
+
+            $schedule->schedule_employee()->each(function ($query) use ($schedule)
             {
-                $query->delete();
+                $employee = Employee::find($query->employee_id);
+                $employee->shift_starts = $schedule->shift_starts;
+                $employee->shift_ends = $schedule->shift_ends;
+                $employee->save();
+
+                if ($employee) {
+                    $query->delete();
+                }
             });
 
             $schedule->delete();
