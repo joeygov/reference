@@ -287,11 +287,6 @@ $(document).ready(function() {
         "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
     });
 
-    $(document).ready(function(){
-        $('#shift_starts').timepicker({});
-        $('#shift_ends').timepicker({});
-        $('#start_date').datepicker();
-    });
 
     function convertTime(time) {
 

@@ -116,6 +116,14 @@
 <script src="{{ asset('assets/vendors/timepicker/jquery.timepicker.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('assets/admin/admin.js') }}"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#shift_starts').timepicker({});
+        $('#shift_ends').timepicker({});
+        $('#start_date').datepicker();
+    });
+</script>
 @endpush
 
 @endsection
