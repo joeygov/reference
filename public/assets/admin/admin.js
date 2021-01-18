@@ -361,5 +361,84 @@ $(document).ready(function() {
      });
 });
 
+$(document).ready(function () {
+    var overbreak_table = $('#overbreak-table').DataTable({
+        "searching": false,
+        "responsive":true,
+        "buttons": [{
+            "extend":"csv",
+            "text": "Export CSV",
+            "title": "Overbreak List",
+            "exportOptions": {
+                "columns": ':not(:last-child)',
+                "modifier":{
+                    "page":"all"
+                }
+              }
+        }],
+        "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
+    });
+
+    $('.buttons-csv').addClass('btn btn-rounded btn-fw');
+
+    $(document).on('click', '.search-overbreak', function () {
+        let account_id = $('#account_id').val();
+        let start_date = $('#from').val();
+        let end_date = $('#to').val();
+        let first_name = $('#first_name').val();
+        let last_name = $('#last_name').val();
+
+        $.get('/admin/overbreak/search', {
+            account_id : account_id,
+            start_date : start_date,
+            end_date : end_date,
+            first_name : first_name,
+            last_name : last_name,
+        }, function (data) {
+            overbreak_table.clear().draw();
+            data.forEach(element => {
+                overbreak_id = element.id;
+                account_id =  element.employee.account_id;
+                first_name = element.employee.first_name;
+                last_name = element.employee.last_name;
+                date = element.overbreak_date;
+                break1 = element.break1;
+                break2 = element.break2;
+                break3 = element.break3;
+                break4 = element.break4;
+                overbreak_table.row.add([
+                    account_id
+                    ,first_name
+                    ,last_name
+                    ,date
+                    ,break1
+                    ,break2
+                    ,break3
+                    ,break4
+                    ,'<a href="/admin/overbreak/edit/' + overbreak_id +'"><i class="fa fa-pencil-square-o"></i></a>' + ' ' +
+                    '<a href="/admin/overbreak/delete/'+ overbreak_id +'"><i class="fa fa-trash-o"></i></a>'
+                ]).draw(true);
+
+                overbreak_table
+                .search( '' )
+                .columns().search( '' )
+                .draw();
+            });
+        }).fail(function (err) {
+            console.log(err)
+        });
+    });
+
+    $(document).on('click','.search-overbreak-reset', function(){
+        $('#account_id').val('');
+        $('#from').val('').datepicker("update");
+        $('#to').val('').datepicker("update");
+        $('#first_name').val('');
+        $('#last_name').val('');
+       $('.search-overbreak').click();
+    });
+
+});
+
 
 
