@@ -212,3 +212,14 @@ div.dt-buttons {
     width: 309px !important;
 }
 
+#calendar_list{
+    width: 103%;
+}
+
+.fc{
+    width: 100%;
+}
+
+#calendar_list .card{
+    width: 115%;
+}

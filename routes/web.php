@@ -84,6 +84,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/list', 'AttendanceController@index')->name('list');
                 Route::get('/search', 'AttendanceController@search')->name('search');
             });
+
+            Route::prefix('calendar')->name('calendar.')->group(function ()
+            {
+                Route::get('/list', 'CalendarController@index')->name('list');
+            });
         });
     });
 });
