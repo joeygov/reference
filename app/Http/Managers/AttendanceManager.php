@@ -66,6 +66,7 @@ class AttendanceManager
 
     private function setEmployeeTimeIn($employee_id, $time_in, $image_link = null)
     {
+        //dd($employee_id, $time_in, $image_link);
         $attendance = new Attendance();
         $attendance->employee_id = $employee_id;
         $attendance->time_in = $time_in;
@@ -96,21 +97,21 @@ class AttendanceManager
     public function timeIn($employee_id, $time_in, $image = null)
     {
         $image_link = null;
-        $response = [
-            'status' => 'error',
-            'message' => 'Error',
-        ];
+        // $response = [
+        //     'status' => 'error',
+        //     'message' => 'Error',
+        // ];
 
-        $attendance = $this->getActiveAttendance($employee_id);
+        // $attendance = $this->getActiveAttendance($employee_id);
 
-        if ($this->empManager->isUserLock($employee_id)) {
+        // if ($this->empManager->isUserLock($employee_id)) {
 
-            $response['message'] = 'Employee account is locked. Please inform admin to unlock.';
+        //     $response['message'] = 'Employee account is locked. Please inform admin to unlock.';
 
-        } elseif ($this->didNotTimeOut($employee_id)) {
+        // } elseif ($this->didNotTimeOut($employee_id)) {
 
-            $response['message'] = 'No previous time out. Please time-out first.';
-        }else {
+        //     $response['message'] = 'No previous time out. Please time-out first.';
+        // }else {
             if ($image) {
 
                 $this->saveImage($image);
@@ -120,13 +121,15 @@ class AttendanceManager
             $this->setEmployeeTimeIn($employee_id, $time_in, $image_link);
 
             $response['status'] = 'success';
-            $response['message'] = 'Successful Time In';
-        }
+            $response['message'] = 'Successfully Time In';
+        //}
+
         return $response;
     }
 
     public function timeOut($employee_id, $time_out, $image = null)
     {
+      
         $response = [
             'status' => 'error',
             'message' => 'Error',
@@ -134,7 +137,7 @@ class AttendanceManager
         $image_link = null;
 
         $attendance = $this->getActiveAttendance($employee_id);
-        if ($attendance) {
+        // if ($attendance) {
             if ($image) {
 
                 $this->saveImage($image);
@@ -144,14 +147,14 @@ class AttendanceManager
             $attendance->time_out = $time_out;
             $attendance->save();
             $response['status'] = 'success';
-            $response['message'] = 'Successful Time out';
+            $response['message'] = 'Successfully Time out';
 
-        } else {
+        // } else {
 
-            $response['message'] = 'No time in. Please time in first.';
-            $response['status'] = 'success';
+        //     $response['message'] = 'No time in. Please time in first.';
+        //     $response['status'] = 'success';
 
-        }
+        // }
 
         return $response;
     }

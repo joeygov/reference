@@ -42,6 +42,11 @@ button{
 
 #cancel{
     background-color:#e3403d;
+    width:100px;
+}
+
+#submit{
+    width:100px;
 }
 
 #in{

@@ -22,11 +22,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::post('/login', 'AuthController@store');
 
     Route::get('/entry_page', 'EntryPageController@entryPage')->name('entry_page');
-    Route::post('/captureImage', 'EntryPageController@saveImage')->name('capture_image');
+    Route::post('/get_emp', 'EntryPageController@getEmployee');;
     Route::get('/fingerprint', 'EntryPageController@fingerprint')->name('fingerprint');
     Route::post('/entrytimeIn', 'EntryPageController@timeInOut')->name('entrytimeinout');
-    Route::post('/entrytimeOut', 'EntryPageController@timeOut')->name('entrytimeout');
     Route::get('/info', 'EntryPageController@getInfo')->name('getInfo');
+
 
     Route::middleware('auth:user')->group(function () {
         Route::get('/home', 'UserController@index')->name('home');

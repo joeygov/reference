@@ -1,7 +1,7 @@
 
 Webcam.set({
-    width: 200,
-    height: 180,
+    width: 240,
+    height: 220,
     image_format: 'jpeg',
     jpeg_quality: 90
 });
@@ -12,6 +12,6 @@ function take_snapshot()
 {
     Webcam.snap( function(data_uri) {
     $(".image-tag").val(data_uri);
-    console.log("snappy");
+
     });
 }

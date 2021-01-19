@@ -15,7 +15,7 @@ class EmployeeManager
 
     public function getEmployeeByEmpId($emp_id)
     {
-        return Employee::where('emp_id', $emp_id)->first();      
+        return Employee::where('emp_id', $emp_id)->first();
     }
 
     public function getEmployee($employee_id)
