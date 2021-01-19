@@ -18,7 +18,7 @@ class AttendanceManager
     public function getAllAttendance($employee_id = null)
     {
         if ($employee_id) {
-            $attendance = Attendance::where('employee_id', $employee_id);
+            $attendance = Attendance::where('employee_id', $employee_id)->get();
         } else {
             $attendance = Attendance::all();
         }
@@ -189,29 +189,26 @@ class AttendanceManager
 
             $query = Attendance::with('employee');
 
-
             if (empty($employee_id) && empty($first_name) && empty($last_name) && empty($account_id) && empty($status) && empty($from) && empty($to)) {
                 return $query->get()->toArray();
             }
 
             if (!empty($employee_id)) {
-                $query->whereHas('employee', function ($q) use ($employee_id)
-                {
+                $query->whereHas('employee', function ($q) use ($employee_id) {
                     $q->where('emp_id', $employee_id);
                 });
             }
 
             if (!empty($first_name)) {
-                $query->where('first_name', 'like', '%' . $first_name . '%');
+                $query->where('first_name', 'like', '%'.$first_name.'%');
             }
 
             if (!empty($last_name)) {
-                $query->where('last_name', 'like', '%' . $last_name . '%');
+                $query->where('last_name', 'like', '%'.$last_name.'%');
             }
 
             if (!empty($account_id)) {
-                $query->whereHas('employee', function ($q) use ($account_id)
-                {
+                $query->whereHas('employee', function ($q) use ($account_id) {
                     $q->where('account_id', $account_id);
                 });
             }
@@ -221,23 +218,22 @@ class AttendanceManager
             }
 
             if (!empty($from)) {
-                if(empty($to)){
+                if (empty($to)) {
                     $query->whereDate('time_in', $from);
                 }
             }
 
             if (!empty($to)) {
-                if(empty($from)){
+                if (empty($from)) {
                     $query->whereDate('time_in', '<=', $to);
                 }
             }
 
             if (!empty($to) && !empty($from)) {
-                $query->whereBetween('time_in',[ $from, $to]);
+                $query->whereBetween('time_in', [$from, $to]);
             }
 
             return  $query->get()->toArray();
-
         } catch (\Exception $e) {
             \Log::error(get_class().':searchAttendance(): '.$e->getMessage());
 

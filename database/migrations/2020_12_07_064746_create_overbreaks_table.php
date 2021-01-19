@@ -16,12 +16,14 @@ class CreateOverbreaksTable extends Migration
         Schema::create('overbreaks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id');
-            $table->integer('break1')->nullable();
-            $table->integer('break2')->nullable();
-            $table->integer('break3')->nullable();
-            $table->integer('break4')->nullable();
+            $table->date('overbreak_date')->nullable();
+            $table->time('break1', 0)->nullable();
+            $table->time('break2', 0)->nullable();
+            $table->time('break3', 0)->nullable();
+            $table->time('break4', 0)->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
+            $table->softDeletes('deleted_at', 0);
             $table->timestamps();
         });
     }

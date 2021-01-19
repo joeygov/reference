@@ -212,3 +212,25 @@ div.dt-buttons {
     width: 309px !important;
 }
 
+.chosen-container-single .chosen-single
+{
+    height: 37px !important;
+    background: #ffffff !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 0.25rem !important;
+    box-shadow: none !important;
+}
+
+.chosen-container-single .chosen-single span {
+    padding: 7px !important;
+}
+
+.chosen-container-single .chosen-single div b {
+    margin-top: 7px !important;
+}
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+  }

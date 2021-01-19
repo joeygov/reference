@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Managers\AttendanceManager;
 use App\Http\Managers\BreakManager;
+use App\Models\Account;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -131,4 +132,11 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
+    public function profile()
+    {
+        $accounts = Account::all();
+        $employee = Auth::user();
+
+        return view('user.profile', compact('employee', 'accounts'));
+    }
 }

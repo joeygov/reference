@@ -23,6 +23,8 @@ class CreateSchedulesTable extends Migration
             $table->date('start_date');
             $table->timestamps();
         });
+
+        \DB::statement("ALTER TABLE schedules AUTO_INCREMENT = 9001;");
     }
 
     /**

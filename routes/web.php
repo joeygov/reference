@@ -43,19 +43,59 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::post('/logout', 'AuthController@logOut')->name('logout');
 
-        Route::namespace('Admin')->prefix('admin')->group(function ()
-        {
-            Route::prefix('employee')->name('employee.')->group(function ()
-            {
-                Route::get('/list','EmployeeController@index')->name('list');
-                Route::get('/search','EmployeeController@search')->name('search');
-            });
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::get('/profile', 'UserController@profile')->name('profile');
+            Route::get('/tracker', 'TrackerController@index')->name('tracker');
+            Route::get('/tracker/search', 'TrackerController@search')->name('tracker.search');
+            Route::get('/calendartracker', 'TrackerController@calendar')->name('calendartracker');
         });
 
-        Route::namespace('ReportManager')->prefix('manager')->group(function () {
+        Route::namespace('Admin')->prefix('admin')->group(function () {
+            Route::prefix('employee')->name('employee.')->group(function () {
+                Route::get('/list', 'EmployeeController@index')->name('list');
+                Route::get('/search', 'EmployeeController@search')->name('search');
+                Route::get('/add', 'EmployeeController@create')->name('create');
+                Route::get('/edit/{employee}', 'EmployeeController@edit')->name('edit');
+                Route::get('/delete/{employee}', 'EmployeeController@destroy')->name('destroy');
+                Route::post('/store', 'EmployeeController@store')->name('store');
+                Route::post('/image', 'EmployeeController@updateImage');
+                Route::post('/update/{employee}', 'EmployeeController@update')->name('update');
+            });
+
+            Route::prefix('account')->name('account.')->group(function () {
+                Route::get('/list', 'AccountController@index')->name('list');
+                Route::get('/add', 'AccountController@create')->name('create');
+                Route::get('/search', 'AccountController@search')->name('search');
+                Route::get('/edit/{account}', 'AccountController@edit')->name('edit');
+                Route::get('/delete/{account}', 'AccountController@destroy')->name('delete');
+                Route::post('/store', 'AccountController@store')->name('store');
+                Route::post('/update/{account}', 'AccountController@update')->name('update');
+            });
+
+            Route::prefix('schedule')->name('schedule.')->group(function () {
+                Route::get('/list', 'ScheduleController@index')->name('list');
+                Route::get('/search', 'ScheduleController@search')->name('search');
+                Route::get('/add', 'ScheduleController@create')->name('create');
+                Route::get('/getEmployee', 'ScheduleController@getEmployee')->name('getEmployee');
+                Route::get('/edit/{schedule}', 'ScheduleController@edit')->name('edit');
+                Route::get('/delete/{schedule}', 'ScheduleController@destroy')->name('delete');
+                Route::post('/store', 'ScheduleController@store')->name('store');
+                Route::post('/update/{schedule}', 'ScheduleController@update')->name('update');
+            });
+
             Route::prefix('attendance')->name('attendance.')->group(function () {
                 Route::get('/list', 'AttendanceController@index')->name('list');
                 Route::get('/search', 'AttendanceController@search')->name('search');
+            });
+
+            Route::prefix('overbreak')->name('overbreak.')->group(function () {
+                Route::get('/list', 'OverBreakController@index')->name('list');
+                Route::get('/search', 'OverBreakController@search')->name('search');
+                Route::get('/add', 'OverBreakController@create')->name('create');
+                Route::get('/edit/{overbreak}', 'OverBreakController@edit')->name('edit');
+                Route::get('/delete/{overbreak}', 'OverBreakController@destroy')->name('delete');
+                Route::post('/store', 'OverBreakController@store')->name('store');
+                Route::post('/update/{overbreak}', 'OverBreakController@update')->name('update');
             });
         });
     });
