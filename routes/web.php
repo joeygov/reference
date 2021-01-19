@@ -85,6 +85,16 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/search', 'AttendanceController@search')->name('search');
             });
 
+            Route::prefix('overbreak')->name('overbreak.')->group(function () {
+                Route::get('/list', 'OverBreakController@index')->name('list');
+                Route::get('/search', 'OverBreakController@search')->name('search');
+                Route::get('/add', 'OverBreakController@create')->name('create');
+                Route::get('/edit/{overbreak}', 'OverBreakController@edit')->name('edit');
+                Route::get('/delete/{overbreak}', 'OverBreakController@destroy')->name('delete');
+                Route::post('/store', 'OverBreakController@store')->name('store');
+                Route::post('/update/{overbreak}', 'OverBreakController@update')->name('update');
+            });
+
             Route::prefix('calendar')->name('calendar.')->group(function ()
             {
                 Route::get('/list', 'CalendarController@index')->name('list');
