@@ -94,6 +94,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::post('/store', 'OverBreakController@store')->name('store');
                 Route::post('/update/{overbreak}', 'OverBreakController@update')->name('update');
             });
+
+            Route::prefix('calendar')->name('calendar.')->group(function ()
+            {
+                Route::get('/list', 'CalendarController@index')->name('list');
+            });
         });
     });
 });
