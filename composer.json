@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-exif": "^7.4",
+        "acaronlex/laravel-calendar": "^2.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -17,6 +18,12 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/jeremykenedy/laravel-calendar.git"
+        }
+    ],
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
