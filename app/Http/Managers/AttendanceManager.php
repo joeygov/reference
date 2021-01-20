@@ -66,7 +66,6 @@ class AttendanceManager
 
     private function setEmployeeTimeIn($employee_id, $time_in, $image_link = null)
     {
-        //dd($employee_id, $time_in, $image_link);
         $attendance = new Attendance();
         $attendance->employee_id = $employee_id;
         $attendance->time_in = $time_in;
@@ -97,32 +96,16 @@ class AttendanceManager
     public function timeIn($employee_id, $time_in, $image = null)
     {
         $image_link = null;
-        // $response = [
-        //     'status' => 'error',
-        //     'message' => 'Error',
-        // ];
 
-        // $attendance = $this->getActiveAttendance($employee_id);
+        if ($image) {
+            $this->saveImage($image);
+            $image_link = $image;
+        }
 
-        // if ($this->empManager->isUserLock($employee_id)) {
+        $this->setEmployeeTimeIn($employee_id, $time_in, $image_link);
 
-        //     $response['message'] = 'Employee account is locked. Please inform admin to unlock.';
-
-        // } elseif ($this->didNotTimeOut($employee_id)) {
-
-        //     $response['message'] = 'No previous time out. Please time-out first.';
-        // }else {
-            if ($image) {
-
-                $this->saveImage($image);
-                $image_link = $image;
-            }
-
-            $this->setEmployeeTimeIn($employee_id, $time_in, $image_link);
-
-            $response['status'] = 'success';
-            $response['message'] = 'Successfully Time In';
-        //}
+        $response['status'] = 'success';
+        $response['message'] = 'Successfully Time In';
 
         return $response;
     }
@@ -137,7 +120,7 @@ class AttendanceManager
         $image_link = null;
 
         $attendance = $this->getActiveAttendance($employee_id);
-        // if ($attendance) {
+
             if ($image) {
 
                 $this->saveImage($image);
@@ -148,13 +131,6 @@ class AttendanceManager
             $attendance->save();
             $response['status'] = 'success';
             $response['message'] = 'Successfully Time out';
-
-        // } else {
-
-        //     $response['message'] = 'No time in. Please time in first.';
-        //     $response['status'] = 'success';
-
-        // }
 
         return $response;
     }

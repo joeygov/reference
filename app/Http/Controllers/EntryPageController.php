@@ -112,7 +112,7 @@ class EntryPageController extends Controller
 
                     }elseif($this->employeeManager->isUserLock($request->employee_id))
                     {
-                        $response['message'] = 'Employee account is locked. Please inform admin to unlock.';
+                        $response['message'] = 'Your account is locked. Please inform admin to unlock.';
                         $response['status'] = 'error';
 
                         return response()->json(['res' => $response , 'employee' => $empinfo, 'time' =>$time], 200);
@@ -141,6 +141,7 @@ class EntryPageController extends Controller
                     return response()->json(['res' => $response , 'employee' => $empinfo, 'time' =>$time], 200);
                 }  
             }
+            return $response;
                   
         }catch( \Exception $e) {
 

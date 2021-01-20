@@ -44,6 +44,7 @@ $('#in').click(function (e){
                 {
                     $('#status').text(response.res['message']);
                     $('#submit').hide();
+
                     
                 }else{
 
@@ -62,6 +63,7 @@ $('#in').click(function (e){
 });
 
 $('#out').click(function (e) {
+
     let employee_id = $('#employee_id').val();
     let OUT = $(this).data('out');
     let image = $('#image_tag').val();
@@ -93,8 +95,7 @@ $('#out').click(function (e) {
                 {
                     $('#status').text(response.res['message']);
                     $('#submit').hide();
-                    $('#cancel').color('blue');
-
+                    
                 }else{
                     $('#status').text('');
                     $('#submit').show();
@@ -102,6 +103,7 @@ $('#out').click(function (e) {
 
             }else{
                 $('#response').text(response['message']);
+
             }
         },
         error: function (){
@@ -109,10 +111,7 @@ $('#out').click(function (e) {
         }
     });
 });
-
-setTimeout(function() {
-    $('#response').fadeOut('fast');
-},5000);
+ 
 
 setTimeout(function() {
     $('#alert').fadeOut('fast');
