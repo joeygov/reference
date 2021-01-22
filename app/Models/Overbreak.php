@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
+use App\Models\Attendance;
+use Auth;
 
 class Overbreak extends Model
 {
@@ -19,6 +22,10 @@ class Overbreak extends Model
         'created_by',
         'updated_by',
     ];
+
+    // protected $appends = [
+    //     'total_over_break'
+    // ];
 
     public function setBreak1Attribute($time)
     {
@@ -44,4 +51,12 @@ class Overbreak extends Model
     {
         return $this->belongsTo('\App\Models\Employee');
     }
+
+    public static function getOverBreakDate($employee_id = null, $time_in = null)
+    {
+        $overbreak_date = self::where('employee_id', $employee_id)->whereDate('overbreak_date', $time_in)->get();
+
+        return $overbreak_date;
+    }
+
 }

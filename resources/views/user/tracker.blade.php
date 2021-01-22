@@ -34,10 +34,8 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        
                                         <button type="button" class="btn btn-primary btn-rounded btn-fw search-attendance">Search</button>
                                         <button type="button" class="btn btn-primary btn-rounded btn-fw search-attendance-reset">Reset</button>
-                                        
                                     </div>
                             </div>
                         </form>
@@ -59,8 +57,12 @@
                                     <tr>
                                         <td>{{ $attendance->time_in }}</td>
                                         <td>{{ $attendance->time_out }}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{ empty($attendance->total_over_break ) ? '00:00:00' : $attendance->total_over_break  }}</td>
+                                        @if ($attendance->break_total > 0)
+                                        <td> <a href="">{{ $attendance->break_total }}</a></td>
+                                        @else
+                                        <td>{{ $attendance->break_total }}</td>
+                                        @endif
                                         <td>{{ $attendance->statuses }}</td>
                                     </tr>
                                 @endforeach
