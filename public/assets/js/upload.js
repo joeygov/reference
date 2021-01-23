@@ -2,6 +2,17 @@ $("#upload").change(function () {
     readURL(this);
 });
 
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageResult').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 $(document).ready(function(){
     let tmpUrl = localStorage.getItem("temp_img");
     $('.image-area img').attr('src' , tmpUrl == null ? "" : tmpUrl);
@@ -17,7 +28,7 @@ $(document).ready(function(){
         $.ajax({
             type:'POST',
             url:'/admin/employee/image',
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             data: formData,
             processData: false,
             contentType: false,
