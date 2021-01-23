@@ -57,6 +57,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::post('/store', 'EmployeeController@store')->name('store');
                 Route::post('/image', 'EmployeeController@updateImage');
                 Route::post('/update/{employee}', 'EmployeeController@update')->name('update');
+                Route::post('/reset', 'EmployeeController@reset')->name('reset');
             });
 
             Route::prefix('account')->name('account.')->group(function () {

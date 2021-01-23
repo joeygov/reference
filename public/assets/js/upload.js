@@ -1,3 +1,14 @@
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageResult').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 $("#upload").change(function () {
     readURL(this);
 });
@@ -43,3 +54,19 @@ $(document).ready(function(){
         });
     });
 });
+
+$(document).ready(function(){
+    $(".reset-password").click(function(){
+        $id = $(this).data('id');
+        $("#myModal").modal('show');
+        $('.modal-body #employee_id').val($id);
+    });
+});
+
+window.addEventListener("load", event => {
+    var image = document.querySelector('.image-area img');
+    var isLoaded = image.complete && image.naturalHeight !== 0;
+    if (!isLoaded) {
+        $('.image-area img').remove();
+    }
+  });

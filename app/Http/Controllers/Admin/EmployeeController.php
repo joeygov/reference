@@ -10,6 +10,7 @@ use App\Models\Employee;
 use finfo;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -115,5 +116,22 @@ class EmployeeController extends Controller
         $employees->delete();
 
         return redirect()->back()->with('success', 'Deleted Successfully');
+    }
+
+    public function reset(EmployeeRequest $request, EmployeeManager $employeeManager)
+    {
+        $emp = $employeeManager->getEmployee($request->employee_id);
+
+        if (!Hash::check($request->old_password, $emp->password)) {
+            return redirect()->back()->with('error', 'Current password does not match!');
+        }
+
+        $reset = $employeeManager->resetPassword($request, $emp);
+
+        if ($reset) {
+            return redirect()->back()->with('success', 'Password Updated Successfully');
+        }
+
+        return redirect()->back()->with('error', 'Transaction Error');
     }
 }
