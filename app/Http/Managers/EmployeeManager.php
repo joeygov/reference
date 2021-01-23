@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Auth;
 
 class EmployeeManager
 {
@@ -20,7 +21,7 @@ class EmployeeManager
 
     public function getEmployee($employee_id)
     {
-        return Employee::find($employee_id)->first();
+        return Employee::find($employee_id);
     }
 
     public function getEmployeeByBio($bio)
@@ -177,5 +178,24 @@ class EmployeeManager
 
         return $retVal;
 
+    }
+
+    public function resetPassword(EmployeeRequest $request, Employee $employee)
+    {
+        $retVal = false;
+
+        try {
+            $employee->update([
+                'password' => $request->new_password
+            ]);
+
+            $retVal = true;
+        } catch (\Exception $e) {
+            \Log::error(get_class().':resetPassword(): '.$e->getMessage());
+
+            $retVal = false;
+        }
+
+        return $retVal;
     }
 }

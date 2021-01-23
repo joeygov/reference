@@ -9,6 +9,7 @@
 @section('maincontent')
 
 <div class="main-panel" id="employee">
+    @include('flash-message')
     <div class="content-wrapper">
         <div class="row" id="employee_row">
             <div class="col-12 grid-margin">
@@ -27,12 +28,12 @@
                             <div class="flex-container-row grow-1 space-between">
                                 <div></div>
                                 <button class="btn btn-primary btn-rounded btn-fw" type="button">Register Fingerprint</button>
-                                <button class="btn btn-primary btn-rounded btn-fw" type="button">Reset Password</button>
+                                <button class="btn btn-primary btn-rounded btn-fw reset-password" data-id="{{$employee->id}}" type="button">Reset Password</button>
                                 <button class="btn btn-primary btn-rounded btn-fw" type="submit">Save</button>
                                 <a href="{{ route('employee.list') }}" class="btn btn-primary btn-rounded btn-fw cancel_btn" type="button">Cancel</a>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
@@ -40,9 +41,14 @@
     </div>
 </div>
 @endsection
-
+@include('common.emp.password_modal')
 @push('js')
 <script src="{{ asset('assets/vendors/timepicker/jquery.timepicker.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('assets/js/upload.js') }}"></script>
+<script type="text/javascript">
+    @if ($errors->has('new_password') || $errors->has('confirm_password') )
+        $("#myModal").modal('show');
+    @endif
+</script>
 @endpush
