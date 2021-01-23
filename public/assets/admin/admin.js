@@ -42,7 +42,7 @@ $(document).ready(function() {
                 first_name = element.first_name;
                 last_name = element.last_name;
                 employee_type = element.emp_statuses;
-                account = element.account['name'];
+                account = element.account == null ? '' : element.account.name;
                 user_status = element.user_statuses;
                 user_role = element.user_roles;
                 employee_table.row.add([
