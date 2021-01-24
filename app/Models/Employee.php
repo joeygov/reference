@@ -108,6 +108,11 @@ class Employee extends User
         return $this->belongsTo('\App\Models\Attendance');
     }
 
+    public function overbreak()
+    {
+        return $this->hasOne('\App\Models\Overbreak');
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
