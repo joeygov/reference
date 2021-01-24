@@ -45,7 +45,8 @@ class EmployeeRequest extends FormRequest
                 'hdmf_num' => 'nullable|numeric|digits:12',
                 'sss_num' => 'nullable|string|digits:12',
                 'philhealth_num' => 'nullable|string|digits:12',
-                'emp_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+                'emp_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'email' => 'nullable|email'
             ];
         }
 

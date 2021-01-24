@@ -200,9 +200,18 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label for="">Email : </label>
+                <input type="email" id="email" value="{{ old('shift_starts', $employee->email) }}" name="email" class="form-control @error('email') is-invalid @enderror " autocomplete="off" placeholder="Email" />
+                @error('email')
+                <span class="error" style="color:red">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
         <div class="form-group row">
             <div class="col-sm-12">
                 <label for="">HDMF# : </label>
@@ -213,7 +222,9 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+</div>
+<div class="row">
+    <div class="col-md-6">
         <div class="form-group row">
             <div class="col-sm-12">
                 <label for="">SSS# : </label>
@@ -224,7 +235,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="form-group row">
             <div class="col-sm-12">
                 <label for="">PhilHealth# : </label>
