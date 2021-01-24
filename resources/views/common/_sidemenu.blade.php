@@ -32,6 +32,7 @@
           <span class="menu-title">My Calendar Tracker</span>
         </a>
       </li>
+      @if($user->user_role == array_search('ADMIN', M_Employee::ROLE) || $user->user_role == array_search('WFM', M_Employee::ROLE))
       <li class="nav-item">
         <a class="nav-link" href="{{ route('attendance.list') }}">
           <i class="menu-icon typcn typcn-document-text"></i>
@@ -44,16 +45,12 @@
           <span class="menu-title">Employee</span>
         </a>
       </li>
+      @endif
+      @if($user->user_role == array_search('ADMIN', M_Employee::ROLE))
       <li class="nav-item">
         <a class="nav-link" href="{{ route('account.list')}}">
           <i class="menu-icon typcn typcn-document-text"></i>
           <span class="menu-title">Accounts</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('overbreak.list')}}">
-          <i class="menu-icon typcn typcn-document-text"></i>
-          <span class="menu-title">Over Breaks</span>
         </a>
       </li>
       <li class="nav-item">
@@ -62,5 +59,15 @@
           <span class="menu-title">Schedules</span>
         </a>
       </li>
+      @endif
+      @if($user->user_role != array_search('USER', M_Employee::ROLE))
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('overbreak.list')}}">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">Over Breaks</span>
+        </a>
+      </li>
+      @endif
+     
     </ul>
   </nav>

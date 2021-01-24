@@ -18,11 +18,12 @@ class TrackerController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
         $attendances = $this->attendanceManager->getAllAttendance(Auth::user()->id);
         $accounts = Account::all();
 
         return view('user.tracker', compact(
-            'attendances', 'accounts'
+            'attendances', 'accounts','user'
         ));
     }
 
