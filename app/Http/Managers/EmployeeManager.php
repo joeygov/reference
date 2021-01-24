@@ -102,6 +102,7 @@ class EmployeeManager
             $employee->is_flex = $request->is_flex;
             $employee->shift_starts = $request->shift_starts;
             $employee->shift_ends = $request->shift_ends;
+            $employee->email = $request->email;
             $employee->hdmf_num = $request->hdmf_num;
             $employee->sss_num = $request->sss_num;
             $employee->philhealth_num = $request->philhealth_num;
@@ -163,6 +164,7 @@ class EmployeeManager
                 'shift_ends' => $request->shift_ends,
                 'hdmf_num' => $request->hdmf_num,
                 'sss_num' => $request->sss_num,
+                'email' => $request->email,
                 'philhealth_num' => $request->philhealth_num,
                 'is_wfh' => isset($request->is_wfh) ? $request->is_wfh : 0,
                 'emp_image' => $image,
