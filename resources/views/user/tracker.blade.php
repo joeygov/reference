@@ -57,7 +57,11 @@
                                     <tr>
                                         <td>{{ $attendance->time_in }}</td>
                                         <td>{{ $attendance->time_out }}</td>
+                                        @if($attendance->total_over_break > 0)
+                                        <td> <a href="">{{ empty($attendance->total_over_break ) ? '00:00:00' : $attendance->total_over_break  }}</a></td>
+                                        @else
                                         <td>{{ empty($attendance->total_over_break ) ? '00:00:00' : $attendance->total_over_break  }}</td>
+                                        @endif
                                         @if ($attendance->break_total > 0)
                                         <td> <a href="">{{ $attendance->break_total }}</a></td>
                                         @else

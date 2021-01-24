@@ -111,28 +111,25 @@ class Attendance extends Model
         return $str;
     }
 
-    // public function getTotalOverBreakAttribute()
-    // {
-    //     $overbreak = Overbreak::getOverBreakDate($this->employee_id, $this->time_in);
+    public function getTotalOverBreakAttribute()
+    {
+        $overbreak = Overbreak::getOverBreakDate($this->employee_id, $this->time_in);
 
-    //     $total = '';
-    //     foreach ($overbreak as $value) {
-    //         $break1 = Carbon::parse($value->break1)->timestamp;
-    //         $break2 = Carbon::parse($value->break2)->timestamp;
+        $total = '';
+        foreach ($overbreak as $value) {
+            $break1 = Carbon::parse($value->break1)->timestamp;
+            $break2 = Carbon::parse($value->break2)->timestamp;
 
-    //         $break3 = Carbon::parse($value->break3)->timestamp;
-    //         $break4 = Carbon::parse($value->break4)->timestamp;
+            $break3 = Carbon::parse($value->break3)->timestamp;
+            $break4 = Carbon::parse($value->break4)->timestamp;
 
-    //         $total = ($break2 - $break1) + ($break4 - $break3);
+            $total = ($break2 - $break1) + ($break4 - $break3);
 
-    //         $total = Attendance::formatBreak($total);
-    //     }
+            $total = Attendance::formatBreak($total);
+        }
 
-    //     return $total;
-    // }
+        return $total;
+    }
 
-    // public function getConnect()
-    // {
-
-    // }
+   
 }

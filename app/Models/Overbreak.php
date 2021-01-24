@@ -23,10 +23,6 @@ class Overbreak extends Model
         'updated_by',
     ];
 
-    // protected $appends = [
-    //     'total_over_break'
-    // ];
-
     public function setBreak1Attribute($time)
     {
         $this->attributes['break1'] = $time ? date("h:i:s", strtotime( $time )) : null;
