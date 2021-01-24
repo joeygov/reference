@@ -166,9 +166,9 @@ class ScheduleManager
             if (empty($schedule_id) && empty($start_date) && empty($shift_starts) && empty($account_id) && empty($shift_ends) && !is_int($type)  ) {
                 return $query->get()->toArray();
             }
-
+           
             if (!empty($schedule_id)) {
-                $query->where('id', 'like', '%' . $schedule_id . '%');
+                $query->where('id', $schedule_id);
             }
 
             if (!empty($start_date)) {
@@ -176,16 +176,13 @@ class ScheduleManager
             }
 
             if (!empty($account_id)) {
-                return $account_id;
                 $query->where('account_id', 'like', '%' .  $account_id . '%');
             }
-
+        
             if ($type == 0) {
                 $query->where('is_flex', FALSE );
             }elseif ($type == 1) {
                 $query->where('is_flex', TRUE );
-            }else {
-                $query->where('is_flex', $type );
             }
 
             if (!empty($shift_starts)) {
