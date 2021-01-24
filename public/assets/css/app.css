@@ -62,3 +62,8 @@ div#main_content{
 .label{
     font-weight: bold;
 }
+
+
+.img-mdm{
+    max-width: 110px;
+}

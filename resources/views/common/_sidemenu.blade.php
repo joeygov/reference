@@ -3,12 +3,12 @@
       <li class="nav-item nav-profile">
         <a href="#" class="nav-link">
           <div class="profile-image">
-            <img class="img-mdm rounded-circle" src="{{ asset('assets/images/faces/face8.jpg') }}" alt="profile image">
+            <img class="img-mdm rounded-circle" src="{{ asset('storage/img/employee/'.$user->emp_image) }}" alt="profile image">
             <div class="dot-indicator bg-success"></div>
           </div>
           <div class="text-wrapper">
-            <p class="profile-name">{{ session('name') }}</p>
-            <p class="designation">{{ session('role') }}</p>
+            <p class="profile-name">{{ $user->first_name.' '.$user->last_name }}</p>
+            <p class="designation">{{ M_Employee::ROLE[$user->user_role] }}</p>
           </div>
         </a>
       </li>
