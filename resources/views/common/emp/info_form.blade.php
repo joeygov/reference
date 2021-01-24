@@ -204,7 +204,7 @@
         <div class="form-group row">
             <div class="col-sm-12">
                 <label for="">Email : </label>
-                <input type="email" id="email" value="{{ old('shift_starts', $employee->email) }}" name="email" class="form-control @error('email') is-invalid @enderror " autocomplete="off" placeholder="Email" />
+                <input type="email" id="email" value="{{ old('email', $employee->email) }}" name="email" class="form-control @error('email') is-invalid @enderror " autocomplete="off" placeholder="Email" />
                 @error('email')
                 <span class="error" style="color:red">{{ $message }}</span>
                 @enderror
