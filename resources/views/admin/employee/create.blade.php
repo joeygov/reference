@@ -9,6 +9,7 @@
 @section('maincontent')
 
 <div class="main-panel" id="employee">
+    @include('flash-message')
     <div class="content-wrapper">
         <div class="row" id="employee_row">
             <div class="col-12 grid-margin">

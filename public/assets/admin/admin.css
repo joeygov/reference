@@ -50,6 +50,7 @@ div.dt-buttons {
 
 .image-area {
     border: 2px dashed rgb(33 150 243);
+    height: 400px;
     padding: 1rem;
     position: relative;
 }

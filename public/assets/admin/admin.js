@@ -4,6 +4,7 @@ $(document).ready(function() {
    var employee_table = $('#employee-table').DataTable({
         "searching": false,
         "responsive":true,
+        "paging": true,
         "buttons": [{
             "extend":"csv",
             "text": "Download CSV",
@@ -18,10 +19,6 @@ $(document).ready(function() {
         "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
     });
 
-    $('#employee-table').on('page.dt', function () {
-        var info = employee_table.page.info();
-
-    });
     $(document).on('click', '.search-employee', function () {
         let employee_id = $('#employee_id').val();
         let first_name = $('#first_name').val();
@@ -42,7 +39,7 @@ $(document).ready(function() {
                 first_name = element.first_name;
                 last_name = element.last_name;
                 employee_type = element.emp_statuses;
-                account = element.account['name'];
+                account = element.account == null ? '' : element.account.name;
                 user_status = element.user_statuses;
                 user_role = element.user_roles;
                 employee_table.row.add([
@@ -88,6 +85,7 @@ $(document).ready(function() {
     var account_table = $('#account-table').DataTable({
         "searching": false,
         "responsive":true,
+        "paging": true,
         "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
     });
 
@@ -160,6 +158,7 @@ $(document).ready(function() {
     var attendance_table = $('#attendance-table').DataTable({
          "searching": false,
          "responsive":true,
+         "paging": true,
          "buttons": [{
              "extend":"csv",
              "text": "Export CSV",
@@ -177,11 +176,6 @@ $(document).ready(function() {
          "processing" : true
      });
 
-
-     $('#employee-table').on('page.dt', function () {
-         var info = employee_table.page.info();
-
-     });
      $(document).on('click', '.search-attendance', function () {
         $('.overlay').show();
 
@@ -284,6 +278,7 @@ $(document).ready(function() {
     var schedule_table = $('#schedule-table').DataTable({
         "searching": false,
         "responsive":true,
+        "paging": true,
         "dom": '<"top"lf>rt<"bottom"ipB><"clear">'
     });
 
@@ -365,6 +360,7 @@ $(document).ready(function () {
     var overbreak_table = $('#overbreak-table').DataTable({
         "searching": false,
         "responsive":true,
+        "paging": true,
         "buttons": [{
             "extend":"csv",
             "text": "Export CSV",

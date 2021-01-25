@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Auth;
 
 class EmployeeManager
 {
@@ -20,7 +21,7 @@ class EmployeeManager
 
     public function getEmployee($employee_id)
     {
-        return Employee::find($employee_id)->first();
+        return Employee::find($employee_id);
     }
 
     public function getEmployeeByBio($bio)
@@ -101,6 +102,7 @@ class EmployeeManager
             $employee->is_flex = $request->is_flex;
             $employee->shift_starts = $request->shift_starts;
             $employee->shift_ends = $request->shift_ends;
+            $employee->email = $request->email;
             $employee->hdmf_num = $request->hdmf_num;
             $employee->sss_num = $request->sss_num;
             $employee->philhealth_num = $request->philhealth_num;
@@ -162,6 +164,7 @@ class EmployeeManager
                 'shift_ends' => $request->shift_ends,
                 'hdmf_num' => $request->hdmf_num,
                 'sss_num' => $request->sss_num,
+                'email' => $request->email,
                 'philhealth_num' => $request->philhealth_num,
                 'is_wfh' => isset($request->is_wfh) ? $request->is_wfh : 0,
                 'emp_image' => $image,
@@ -177,5 +180,24 @@ class EmployeeManager
 
         return $retVal;
 
+    }
+
+    public function resetPassword(EmployeeRequest $request, Employee $employee)
+    {
+        $retVal = false;
+
+        try {
+            $employee->update([
+                'password' => $request->new_password
+            ]);
+
+            $retVal = true;
+        } catch (\Exception $e) {
+            \Log::error(get_class().':resetPassword(): '.$e->getMessage());
+
+            $retVal = false;
+        }
+
+        return $retVal;
     }
 }
