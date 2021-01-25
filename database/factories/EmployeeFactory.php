@@ -29,7 +29,7 @@ class EmployeeFactory extends Factory
             'user_role' => $this->faker->randomElement([1,2,3,4]),
             'email' => $this->faker->unique()->safeEmail,
             'is_wfh' => $this->faker->randomElement([true, false]),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => 'password', // password
             'remember_token' => Str::random(10),
         ];
     }

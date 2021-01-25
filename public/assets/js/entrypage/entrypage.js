@@ -13,6 +13,7 @@ function display_ct()
 }
 
 $('#in').click(function (e){
+    $('#response').text('');
     let emp_id = $('#employee_id').val();
     let IN = $(this).data('in');
     let image = $('#image_tag').val();
@@ -53,6 +54,7 @@ $('#in').click(function (e){
                 }
             }  
             else{
+                $('#response').text('');
                 $('#response').text(response.message);
             }
         },
@@ -63,7 +65,7 @@ $('#in').click(function (e){
 });
 
 $('#out').click(function (e) {
-
+    $('#response').text('');
     let employee_id = $('#employee_id').val();
     let OUT = $(this).data('out');
     let image = $('#image_tag').val();
@@ -102,6 +104,7 @@ $('#out').click(function (e) {
                 }
 
             }else{
+                $('#response').text('');
                 $('#response').text(response['message']);
 
             }
@@ -112,7 +115,6 @@ $('#out').click(function (e) {
     });
 });
  
-
 setTimeout(function() {
     $('#alert').fadeOut('fast');
 },10000);
